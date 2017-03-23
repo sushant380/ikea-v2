@@ -714,9 +714,7 @@ var baseTop=new THREE.Object3D();
 			itemsPositions.push(roomItem);
 		}
 	}
-	itemsPositions.forEach(function(it){
-		console.log(it.uuid);
-	});
+	
 	/*var eastWall=this.allWallMeshes[0];
 	
 	var wallWidth=new THREE.Box3().setFromObject(eastWall).getSize().x;

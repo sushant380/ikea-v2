@@ -329,7 +329,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 
   // For high end VR devices like Vive and Oculus, take into account the stage
   // parameters provided.
-  setupStage();
+  
 }
 
 				function animate(timestamp) {
@@ -359,6 +359,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 					// stageParameters, rearrange the scene.
 					function setupStage() {
 					  navigator.getVRDisplays().then(function(displays) {
+					  	console.log('vr display is working')
 					    if (displays.length > 0) {
 					      vrDisplay = displays[0];
 					      if (vrDisplay.stageParameters) {
@@ -383,7 +384,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				  scene.add(skybox);
 
 				  // Place the cube in the middle of the scene, at user height.
-				  camera.position.set(0, controls.userHeight, 2);
+				  camera.position.set(1, controls.userHeight, 6);
 				}
 
 			function changeRpd(){
@@ -416,7 +417,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				if(SELECTEDINTERSECT){
 					for(var n=0;n<interactiveRoomObjs.length;n++){
 						if(interactiveRoomObjs[n].obj){
-							console.log(interactiveRoomObjs[n].obj.uuid+"  "+SELECTEDINTERSECT.uuid);
+							//console.log(interactiveRoomObjs[n].obj.uuid+"  "+SELECTEDINTERSECT.uuid);
 							if(interactiveRoomObjs[n].obj.uuid===SELECTEDINTERSECT.uuid){
 								interactiveRoomObjs[n].playAnimation();
 							}
@@ -428,7 +429,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				if(SELECTEDINTERSECT){
 					for(var n=0;n<interactiveRoomObjs.length;n++){
 						if(interactiveRoomObjs[n].obj){
-							console.log(interactiveRoomObjs[n].obj.uuid+"  "+SELECTEDINTERSECT.uuid);
+							//console.log(interactiveRoomObjs[n].obj.uuid+"  "+SELECTEDINTERSECT.uuid);
 							if(interactiveRoomObjs[n].obj.uuid===SELECTEDINTERSECT.uuid){
 								interactiveRoomObjs[n].stopAnimation();
 							}

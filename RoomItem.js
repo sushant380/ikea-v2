@@ -106,7 +106,7 @@ function RoomItem(item,parent,itemsHolder){
 				
 			}
 			if(scope.parent){
-				console.log(scope.itemType);
+//				console.log(scope.itemType);
 				scope.parent.add(scope.obj);
 				scope.parent.updateParent();
 			}else if(scope.parent===undefined){
@@ -118,7 +118,7 @@ function RoomItem(item,parent,itemsHolder){
 	};
 	this.updateParent=function(){
 		this.childLoadCount++;
-		console.log(this.itemType);
+	//	console.log(this.itemType);
 		if(this.childLoadCount===this.rawChildItems.length){
 			if(this.itemType && this.itemType.indexOf('CabWorktop')>-1){
 				var cwtgeometry = new THREE.Geometry().fromBufferGeometry( this.obj.geometry );
@@ -158,7 +158,7 @@ function RoomItem(item,parent,itemsHolder){
 			//if(scope.shape=='IKEA.ART.90304629' || scope.shape=='IKEA.ART.40205599' || scope.shape=='IKEA.ART.00205431' || scope.shape=='IKEA.ART.00315175' || scope.shape=='IKEA.ART.30176470' || scope.shape=='IKEA.ART.50215475' || scope.shape=='IKEA.ART.60204645' || scope.shape=='IKEA.ART.60205664' || scope.shape=='IKEA.ART.90038541_LeftJustified' || scope.shape=='IKEA.ART.90038541_RightJustified' || scope.shape=='IKEA.ART.90304629' ) {
 			var materialLoader=new THREE.MTLLoader();
 			materialLoader.setPath('models/obj/');
-			console.log(scope.shape);
+//			console.log(scope.shape);
 			materialLoader.load(scope.shape+'.mtl',function(material){
 					var loader = new THREE.OBJLoader();
 					loader.setPath( 'models/obj/' );
@@ -181,7 +181,7 @@ function RoomItem(item,parent,itemsHolder){
 					
 					callback(scope);
 				},function(){},function(){
-					console.log('failed= ',scope);
+//					console.log('failed= ',scope);
 					var object=new THREE.BoxGeometry(scope.w, scope.h, scope.d);
 					var mesh_mat=undefined;
 					if(scope.name.indexOf("Obstacle")>-1){
@@ -203,7 +203,7 @@ function RoomItem(item,parent,itemsHolder){
 					callback(scope);
 				});
 			},function(){},function(){
-				console.log('failed= ',scope);
+//				console.log('failed= ',scope);
 				var loader = new THREE.OBJLoader();
 					loader.setPath( 'models/obj/' );
 					
@@ -221,7 +221,7 @@ function RoomItem(item,parent,itemsHolder){
 					scope.obj = object.children[0];
 					callback(scope);
 				},function(){},function(){
-					console.log('failed= ',scope);
+//					console.log('failed= ',scope);
 					var object=new THREE.BoxGeometry(scope.w, scope.h, scope.d);
 					var mesh_mat=undefined;
 					if(scope.name.indexOf("Obstacle")>-1){
@@ -363,7 +363,7 @@ else						t = new THREE.Vector3(a.w/2, a.h/2, a.d/2)		//??
 	                updateBox(scope.obj);
 
 				}).onComplete(function(){
-					console.log('completed');
+//					console.log('completed');
 				}).easing(TWEEN.Easing.Quadratic.In).start();
 				animate_OC();
 			});
@@ -482,7 +482,7 @@ else						t = new THREE.Vector3(a.w/2, a.h/2, a.d/2)		//??
                 updateBox(scope.obj);
 
 			}).onComplete(function(){
-				console.log('completed');
+//				console.log('completed');
 			}).easing(TWEEN.Easing.Quadratic.In).start();
 			animate_OC();
 		}

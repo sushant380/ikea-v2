@@ -74,8 +74,8 @@ this.initRPD = function() {
 				myRoomItems.scene = scene;
 				myRoomItems.init();
 				
-					
-				vrDisplay.requestAnimationFrame(animate);
+				setupStage();
+				// vrDisplay.requestAnimationFrame(animate);
 				/*controls.object.position.set(
 -0.11607159221143132,
 2.0924870639128503,
