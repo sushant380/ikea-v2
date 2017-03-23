@@ -1,6 +1,14 @@
 "use strict";
 var camera, scene, renderer, dirLight, g_lookAtObj, lastCameraPos = new THREE.Vector3( 0, 0, 0 ), myRoom, controls, effect, g_DeviceType, 
 clock,exporterHelpers,personStandingHeight, controlsUI, debugUI,roundedRectShapemesh, platform,useRuler,projector,vrDisplay,vrButton;
+var lastRenderTime = 0;
+// Currently active VRDisplay.
+// How big of a box to render.
+var boxSize = 5;
+// Various global THREE.Objects.
+
+var cube;// EnterVRButton for rendering enter/exit UI.
+
 
 			var interactiveObjects = [];
 			var interactiveRoomObjs = []
@@ -267,7 +275,8 @@ clock,exporterHelpers,personStandingHeight, controlsUI, debugUI,roundedRectShape
 				//window.addEventListener('deviceorientation', setOrientationControls, true);
 				
 				// event for window resize 
-				window.addEventListener( 'resize', onWindowResize, false );
+				 window.addEventListener('resize', onResize, true);
+  				window.addEventListener('vrdisplaypresentchange', onResize, true);
 															
 				// event which will be called after async loads to trigger rerendering
 				renderer.domElement.addEventListener( 'rerender', render, false );
@@ -296,7 +305,7 @@ clock,exporterHelpers,personStandingHeight, controlsUI, debugUI,roundedRectShape
 				  document.getElementById('magic-window').addEventListener('click', function() {
 				    vrButton.requestEnterFullscreen();
 				  });
-				  window.addEventListener('vrdisplaypresentchange', onResize, true);
+				 setupStage();
 				}
 				function showPanel(e){
 
@@ -338,6 +347,23 @@ clock,exporterHelpers,personStandingHeight, controlsUI, debugUI,roundedRectShape
 					    }
 					  });
 					}
+
+				function setStageDimensions(stage) {
+				  // Make the skybox fit the stage.
+				  var material = skybox.material;
+				  scene.remove(skybox);
+
+				  // Size the skybox according to the size of the actual stage.
+				  var geometry = new THREE.BoxGeometry(stage.sizeX, boxSize, stage.sizeZ);
+				  skybox = new THREE.Mesh(geometry, material);
+
+				  // Place it on the floor.
+				  skybox.position.y = boxSize/2;
+				  scene.add(skybox);
+
+				  // Place the cube in the middle of the scene, at user height.
+				  camera.position.set(0, controls.userHeight, 0);
+				}
 
 			function changeRpd(){
 				var rpd=$('#rpdChanger').val();
