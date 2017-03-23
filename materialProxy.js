@@ -10,7 +10,7 @@ this.textureOnLoaded = function(texture) {
 
 	// call rerender once the texture is loaded
 
-	renderer.domElement.dispatchEvent(new Event('rerender'));
+	//renderer.domElement.dispatchEvent(new Event('rerender'));
 				
 	return texture
 },
