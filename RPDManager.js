@@ -76,10 +76,10 @@ this.initRPD = function() {
 				
 					
 				render();
-				controls.object.position.set(
+				/*controls.object.position.set(
 -0.11607159221143132,
 2.0924870639128503,
-6.038192222751323);
+6.038192222751323);*/
 
 			//	camera.lookAt(scene.position);
 			$('[data-toggle="tooltip"]').tooltip();   
