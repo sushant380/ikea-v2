@@ -75,15 +75,15 @@ this.initRPD = function() {
 				myRoomItems.init();
 				
 					
-				render();
-				controls.object.position.set(
+				vrDisplay.requestAnimationFrame(animate);
+				/*controls.object.position.set(
 -0.11607159221143132,
 2.0924870639128503,
-6.038192222751323);
+6.038192222751323);*/
 
 			//	camera.lookAt(scene.position);
-			$('[data-toggle="tooltip"]').tooltip();   
-			 /*$("#myModal").wizard({
+			/*$('[data-toggle="tooltip"]').tooltip();   
+			 $("#myModal").wizard({
             	exit:'Exit',
             	back:'Back',
             	next:'Next',
@@ -93,7 +93,7 @@ this.initRPD = function() {
                   	var shape=$('.btn-group input:radio:checked').val()
                     drawShape("I",color);
                 }
-            });*/
+            });
 			 $('.selectpicker').selectpicker({
 
 			 });
@@ -104,7 +104,7 @@ this.initRPD = function() {
 			            'top': $(this).offset().top 
 					}).show();
 			});
-			
+			*/
 				
 		},
 		
