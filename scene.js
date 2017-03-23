@@ -265,7 +265,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 					//CamConUI+= "<br><a href=\"#\" onclick=\"personStandingHeight=1.8;stopAnimation=true;setClose();return false;\">Close<br>";
 					
 					//setDeviceOrientationControl()
-					setPerspective() // default
+					//setPerspective() // default
 
 				}
 				
