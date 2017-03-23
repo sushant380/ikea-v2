@@ -383,7 +383,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				  scene.add(skybox);
 
 				  // Place the cube in the middle of the scene, at user height.
-				  camera.position.set(0, controls.userHeight, 0);
+				  camera.position.set(0, controls.userHeight, 2);
 				}
 
 			function changeRpd(){
