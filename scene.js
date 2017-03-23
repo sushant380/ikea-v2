@@ -4,7 +4,7 @@ clock,exporterHelpers,personStandingHeight, controlsUI, debugUI,roundedRectShape
 var lastRenderTime = 0,skybox;
 // Currently active VRDisplay.
 // How big of a box to render.
-var boxSize = 5;
+var boxSize = 10;
 // Various global THREE.Objects.
 
 var cube;// EnterVRButton for rendering enter/exit UI.
