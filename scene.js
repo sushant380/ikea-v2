@@ -1,7 +1,7 @@
 "use strict";
 var camera, scene, renderer, dirLight, g_lookAtObj, lastCameraPos = new THREE.Vector3( 0, 0, 0 ), myRoom, controls, effect, g_DeviceType, 
 clock,exporterHelpers,personStandingHeight, controlsUI, debugUI,roundedRectShapemesh, platform,useRuler,projector,vrDisplay,vrButton;
-var lastRenderTime = 0;
+var lastRenderTime = 0,skybox;
 // Currently active VRDisplay.
 // How big of a box to render.
 var boxSize = 5;
@@ -274,6 +274,9 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				//add condition
 				//window.addEventListener('deviceorientation', setOrientationControls, true);
 				
+
+				var loader = new THREE.TextureLoader();
+  				loader.load('img/box.png', onTextureLoaded);
 				// event for window resize 
 				 window.addEventListener('resize', onResize, true);
   				window.addEventListener('vrdisplaypresentchange', onResize, true);
@@ -305,12 +308,30 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				  document.getElementById('magic-window').addEventListener('click', function() {
 				    vrButton.requestEnterFullscreen();
 				  });
-				 setupStage();
+				 
 				}
-				function showPanel(e){
+				function onTextureLoaded(texture) {
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(boxSize, boxSize);
 
-					
-				}
+  var geometry = new THREE.BoxGeometry(boxSize, boxSize, boxSize);
+  var material = new THREE.MeshBasicMaterial({
+    map: texture,
+    color: 0x01BE00,
+    side: THREE.BackSide
+  });
+
+  // Align the skybox to the floor (which is at y=0).
+  skybox = new THREE.Mesh(geometry, material);
+  skybox.position.y = boxSize/2;
+  scene.add(skybox);
+
+  // For high end VR devices like Vive and Oculus, take into account the stage
+  // parameters provided.
+  setupStage();
+}
+
 				function animate(timestamp) {
 					  var delta = Math.min(timestamp - lastRenderTime, 500);
 					  lastRenderTime = timestamp;
