@@ -337,7 +337,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 					  lastRenderTime = timestamp;
 
 					  // Apply rotation to cube mesh
-					  cube.rotation.y += delta * 0.0006;
+					//  cube.rotation.y += delta * 0.0006;
 
 					  // Only update controls if we're presenting.
 					  if (vrButton.isPresenting()) {
