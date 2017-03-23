@@ -1,6 +1,6 @@
 "use strict";
 var camera, scene, renderer, dirLight, g_lookAtObj, lastCameraPos = new THREE.Vector3( 0, 0, 0 ), myRoom, controls, effect, g_DeviceType, 
-clock,exporterHelpers,personStandingHeight, controlsUI, debugUI,roundedRectShapemesh, platform,useRuler,projector;
+clock,exporterHelpers,personStandingHeight, controlsUI, debugUI,roundedRectShapemesh, platform,useRuler,projector,vrDisplay,vrButton;
 
 			var interactiveObjects = [];
 			var interactiveRoomObjs = []
@@ -271,17 +271,74 @@ clock,exporterHelpers,personStandingHeight, controlsUI, debugUI,roundedRectShape
 															
 				// event which will be called after async loads to trigger rerendering
 				renderer.domElement.addEventListener( 'rerender', render, false );
-				
+				var uiOptions = {
+				    color: 'black',
+				    background: 'white',
+				    corners: 'square'
+				  };
 				// Show Controls
 		
 				// RPD box
 				//controlsUI.innerHTML=CamConUI;
-				 
+				// camera.position.set(0,1.08,-1.6749995000000002);
+				 vrButton = new webvrui.EnterVRButton(renderer.domElement, uiOptions);
+				  vrButton.on('exit', function() {
+				    camera.quaternion.set(0, 0, 0, 1);
+				    camera.position.set(0, controls.userHeight, 0);
+				  });
+				  vrButton.on('hide', function() {
+				    document.getElementById('ui').style.display = 'none';
+				  });
+				  vrButton.on('show', function() {
+				    document.getElementById('ui').style.display = 'inherit';
+				  });
+				  document.getElementById('vr-button').appendChild(vrButton.domElement);
+				  document.getElementById('magic-window').addEventListener('click', function() {
+				    vrButton.requestEnterFullscreen();
+				  });
+				  window.addEventListener('vrdisplaypresentchange', onResize, true);
 				}
 				function showPanel(e){
 
 					
 				}
+				function animate(timestamp) {
+					  var delta = Math.min(timestamp - lastRenderTime, 500);
+					  lastRenderTime = timestamp;
+
+					  // Apply rotation to cube mesh
+					  cube.rotation.y += delta * 0.0006;
+
+					  // Only update controls if we're presenting.
+					  if (vrButton.isPresenting()) {
+					    controls.update();
+					  }
+					  // Render the scene.
+					  effect.render(scene, camera);
+
+					  vrDisplay.requestAnimationFrame(animate);
+					}
+
+					function onResize(e) {
+					  effect.setSize(window.innerWidth, window.innerHeight);
+					  camera.aspect = window.innerWidth / window.innerHeight;
+					  camera.updateProjectionMatrix();
+					}
+
+					// Get the HMD, and if we're dealing with something that specifies
+					// stageParameters, rearrange the scene.
+					function setupStage() {
+					  navigator.getVRDisplays().then(function(displays) {
+					    if (displays.length > 0) {
+					      vrDisplay = displays[0];
+					      if (vrDisplay.stageParameters) {
+					        setStageDimensions(vrDisplay.stageParameters);
+					      }
+					      vrDisplay.requestAnimationFrame(animate);
+					    }
+					  });
+					}
+
 			function changeRpd(){
 				var rpd=$('#rpdChanger').val();
 				selectedRpd=rpd;
