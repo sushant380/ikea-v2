@@ -284,7 +284,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				// event which will be called after async loads to trigger rerendering
 				renderer.domElement.addEventListener( 'rerender', render, false );
 				var uiOptions = {
-				    color: 'black',
+				    color: 'red',
 				    background: 'white',
 				    corners: 'square'
 				  };
