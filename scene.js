@@ -318,13 +318,13 @@ var cube;// EnterVRButton for rendering enter/exit UI.
   var geometry = new THREE.BoxGeometry(boxSize, boxSize, boxSize);
   var material = new THREE.MeshBasicMaterial({
     map: texture,
-    color: 0x01BE00,
-    side: THREE.BackSide
+    color: 0xFFFFFF,
+  //  side: THREE.BackSide
   });
 
   // Align the skybox to the floor (which is at y=0).
   skybox = new THREE.Mesh(geometry, material);
-  skybox.position.y = boxSize/2;
+  skybox.position.y = -1;
   scene.add(skybox);
 
   // For high end VR devices like Vive and Oculus, take into account the stage
@@ -380,7 +380,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				  skybox = new THREE.Mesh(geometry, material);
 
 				  // Place it on the floor.
-				  skybox.position.y = boxSize/2;
+				  skybox.position.y = -10;
 				  scene.add(skybox);
 
 				  // Place the cube in the middle of the scene, at user height.
