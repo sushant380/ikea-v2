@@ -276,7 +276,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				
 
 				var loader = new THREE.TextureLoader();
-  				loader.load('img/box.png', onTextureLoaded);
+  				loader.load('img/celling.jpg', onTextureLoaded);
 				// event for window resize 
 				 window.addEventListener('resize', onResize, true);
   				window.addEventListener('vrdisplaypresentchange', onResize, true);
@@ -311,20 +311,20 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				 
 				}
 				function onTextureLoaded(texture) {
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(boxSize, boxSize);
+				  texture.wrapS = THREE.RepeatWrapping;
+				  texture.wrapT = THREE.RepeatWrapping;
+				  texture.repeat.set(5,5);
 
-  var geometry = new THREE.BoxGeometry(boxSize, boxSize, boxSize);
-  var material = new THREE.MeshBasicMaterial({
-    map: texture,
-    color: 0xFFFFFF,
-  //  side: THREE.BackSide
-  });
+				  var geometry = new THREE.BoxGeometry(boxSize, boxSize, boxSize);
+				  var material = new THREE.MeshBasicMaterial({
+				    map: texture,
+				    
+				  	side: THREE.BackSide
+				  });
 
   // Align the skybox to the floor (which is at y=0).
   skybox = new THREE.Mesh(geometry, material);
-  skybox.position.y = -1;
+  skybox.position.y = -2;
   scene.add(skybox);
 
   // For high end VR devices like Vive and Oculus, take into account the stage

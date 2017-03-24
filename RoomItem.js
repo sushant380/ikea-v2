@@ -191,15 +191,15 @@ function RoomItem(item,parent,itemsHolder){
 					}
 					var mesh=new THREE.Mesh(object, mesh_mat);
 					mesh.castShadow = true
-					mesh.recieveShadow = true
+					mesh.recieveShadow = false
 					// wireframe
 					if(scope.showWireframe ) {
 						var geo = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
 						var mat = new THREE.LineBasicMaterial( { color: 0xFF0000, linewidth: 2 } );
 						var wireframe = new THREE.LineSegments( geo, mat );
-						//mesh.add(wireframe)
+						mesh.add(wireframe)
 					}
-					scope.obj = mesh;
+					
 					callback(scope);
 				});
 			},function(){},function(){
@@ -232,15 +232,16 @@ function RoomItem(item,parent,itemsHolder){
 					
 					var mesh=new THREE.Mesh(object, mesh_mat);
 					mesh.castShadow = true
-					mesh.recieveShadow = true
+					mesh.recieveShadow = false
 					// wireframe
 					if(scope.showWireframe ) {
 						var geo = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
-						var mat = new THREE.LineBasicMaterial( { color: 0xFF0000, linewidth: 2 } );
+						var mat = new THREE.LineBasicMaterial( { color: 0x7f7f7f, linewidth: 2 } );
 						var wireframe = new THREE.LineSegments( geo, mat );
-						//mesh.add(wireframe)
+						mesh.add(wireframe)
 					}
 					scope.obj = mesh;
+					
 					callback(scope);
 				});
 			});
