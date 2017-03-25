@@ -72,9 +72,9 @@ this.initRPD = function() {
 				myRoomItems.collidableFloor = myRoom.floorShape.clone() // dont know why but had to clone it...
 				//
 				myRoomItems.scene = scene;
-				myRoomItems.init();
+			//	myRoomItems.init();
 				
-				setupStage();
+			//	setupStage();
 				// vrDisplay.requestAnimationFrame(animate);
 				/*controls.object.position.set(
 -0.11607159221143132,
