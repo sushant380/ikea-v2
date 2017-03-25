@@ -115,7 +115,7 @@ this.setRPD = function() {
 				if(element!=undefined) 	element.parentNode.removeChild(element);
 				if(RPD_Raw.length>1) {
 				init();
-				this.initRPD()
+				//this.initRPD()
 				
 				}
 			}
