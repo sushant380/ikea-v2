@@ -278,7 +278,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			//	var loader = new THREE.TextureLoader();
   			//	loader.load('img/celling.jpg', onTextureLoaded);
 				// event for window resize 
-				 window.addEventListener('resize', onResize, true);
+				/* window.addEventListener('resize', onResize, true);
   				window.addEventListener('vrdisplaypresentchange', onResize, true);
 															
 				// event which will be called after async loads to trigger rerendering
@@ -287,7 +287,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				    color: 'red',
 				    background: 'white',
 				    corners: 'square'
-				  };
+				  };*/
 				// Show Controls
 		
 				// RPD box
@@ -316,7 +316,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 
 				  // Add a repeating grid as a skybox.
 				  var loader = new THREE.TextureLoader();
-				  loader.load('../img/box.png', onTextureLoaded);
+				  loader.load('img/box.png', onTextureLoaded);
 
 				  // Create 3D objects.
 				  var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
