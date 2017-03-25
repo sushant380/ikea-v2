@@ -55,7 +55,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				
 				personStandingHeight = 1.6 // default standing height
 				
-				scene = new THREE.Scene();
+				/*scene = new THREE.Scene();
 				// LIGHTS
 				var hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
 				hemiLight.position.set( 0, 0, 500 );
@@ -95,7 +95,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 
 				  // Apply VR stereo rendering to renderer.
 				  effect = new THREE.VREffect(renderer);
-				  effect.setSize(window.innerWidth, window.innerHeight);
+				  effect.setSize(window.innerWidth, window.innerHeight);*/
 				//console.log(ua)
 				
 				
@@ -293,7 +293,52 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				// RPD box
 				//controlsUI.innerHTML=CamConUI;
 				// camera.position.set(0,1.08,-1.6749995000000002);
-				 vrButton = new webvrui.EnterVRButton(renderer.domElement, uiOptions);
+				var renderer = new THREE.WebGLRenderer({antialias: true});
+				  renderer.setPixelRatio(window.devicePixelRatio);
+
+				  // Append the canvas element created by the renderer to document body element.
+				  document.body.appendChild(renderer.domElement);
+
+				  // Create a three.js scene.
+				  scene = new THREE.Scene();
+
+				  // Create a three.js camera.
+				  var aspect = window.innerWidth / window.innerHeight;
+				  camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 10000);
+
+				  controls = new THREE.VRControls(camera);
+				  controls.standing = true;
+				  camera.position.y = controls.userHeight;
+
+				  // Apply VR stereo rendering to renderer.
+				  effect = new THREE.VREffect(renderer);
+				  effect.setSize(window.innerWidth, window.innerHeight);
+
+				  // Add a repeating grid as a skybox.
+				  var loader = new THREE.TextureLoader();
+				  loader.load('../img/box.png', onTextureLoaded);
+
+				  // Create 3D objects.
+				  var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+				  var material = new THREE.MeshNormalMaterial();
+				  cube = new THREE.Mesh(geometry, material);
+
+				  // Position cube mesh to be right in front of you.
+				  cube.position.set(0, controls.userHeight, -1);
+
+				  // Add cube mesh to your three.js scene
+				  scene.add(cube);
+
+				  window.addEventListener('resize', onResize, true);
+				  window.addEventListener('vrdisplaypresentchange', onResize, true);
+
+				  // Initialize the WebVR UI.
+				  var uiOptions = {
+				    color: 'black',
+				    background: 'white',
+				    corners: 'square'
+				  };
+				  vrButton = new webvrui.EnterVRButton(renderer.domElement, uiOptions);
 				  vrButton.on('exit', function() {
 				    camera.quaternion.set(0, 0, 0, 1);
 				    camera.position.set(0, controls.userHeight, 0);
@@ -308,7 +353,6 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				  document.getElementById('magic-window').addEventListener('click', function() {
 				    vrButton.requestEnterFullscreen();
 				  });
-				 setupStage();
 				}
 				function onTextureLoaded(texture) {
 				  texture.wrapS = THREE.RepeatWrapping;
