@@ -275,8 +275,8 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				//window.addEventListener('deviceorientation', setOrientationControls, true);
 				
 
-				var loader = new THREE.TextureLoader();
-  				loader.load('img/celling.jpg', onTextureLoaded);
+			//	var loader = new THREE.TextureLoader();
+  			//	loader.load('img/celling.jpg', onTextureLoaded);
 				// event for window resize 
 				 window.addEventListener('resize', onResize, true);
   				window.addEventListener('vrdisplaypresentchange', onResize, true);
