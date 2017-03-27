@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Web VR boilerplate</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<style>
+body {
+        background-color: #000000;
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      #extra {
+        position: fixed;
+        width: 100%;
+        color: #ffffff;
+        padding: 5px;
+        font-family: Monospace;
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+        z-index: 1;
+        bottom: 3px;
+      }
+      #extra a {
+        display: inline-block;
+        padding: 2px 5px;
+        margin: 2px 5px;
+      }
+      #controller {
+        background-color: #fff;
+        color: #000;
+        border: 1px solid #000;
+        z-index: 2;
+      }
+      #controllertype {
+        background-color: #ccc;
+        color: #000;
+        border: 1px solid #999;
+      }
+      #calibrate-compass-popup .figure8 {
+        font-family: Verdana;
+        font-size: 120px;
+        margin: -50px 0 -30px 0;
+        padding:  0;
+        text-align: center;
+      }
+      /* Simple popup style */
+      .popup {
+        position: absolute;
+        width: 340px;
+        height: 180px;
+        left: 50%;
+        top: 50%;
+        margin: -130px 0 0 -190px;
+        visibility: hidden;
+        /*opacity: 0;*/
+        z-index: 3;
+        padding: 20px;
+        background: white;
+        box-shadow: 0px 0px 20px rgba( 0, 0, 0, 0.6 );
+        border-radius: 3px;
+      }
+      .popup button {
+        border: 0px;
+        padding: 8px 10px;
+        margin: 5px 0px;
+        border-radius: 1px;
+        cursor: pointer;
+        color: #fff;
+        background: #333;
+        font-size: 15px;
+      }
+</style>
+</head>
+
+<body>
+  
+
+    <aside id="calibrate-compass-popup" class="popup">
+      <p>
+        <strong>Calibrate your compass</strong> by moving your device in a figure 8 motion as shown below.
+      </p>
+      <p class="figure8">&infin;</p>
+      <button>Continue</button>
+    </aside>
+
+    <div id="extra">
+      <span id="controllername">DeviceOrientation Control:</span>
+      <a id="controllertype" href="#" name="controllertype">Quaternions</a>
+    </div>
+
+</body>
+
+<script>
+/*
+ * Debug parameters.
+ */
+WebVRConfig = {
+  /**
+   * webvr-polyfill configuration
+   */
+
+  // Forces availability of VR mode.
+  //FORCE_ENABLE_VR: true, // Default: false.
+  // Complementary filter coefficient. 0 for accelerometer, 1 for gyro.
+  //K_FILTER: 0.98, // Default: 0.98.
+  // How far into the future to predict during fast motion.
+  //PREDICTION_TIME_S: 0.040, // Default: 0.040 (in seconds).
+  // Flag to disable touch panner. In case you have your own touch controls
+  //TOUCH_PANNER_DISABLED: true, // Default: false.
+  // Enable yaw panning only, disabling roll and pitch. This can be useful for
+  // panoramas with nothing interesting above or below.
+  //YAW_ONLY: true, // Default: false.
+  // Enable the deprecated version of the API (navigator.getVRDevices).
+  //ENABLE_DEPRECATED_API: true, // Default: false.
+  // Scales the recommended buffer size reported by WebVR, which can improve
+  // performance. Making this very small can lower the effective resolution of
+  // your scene.
+  BUFFER_SCALE: 0.5, // default: 1.0
+  // Allow VRDisplay.submitFrame to change gl bindings, which is more
+  // efficient if the application code will re-bind it's resources on the
+  // next frame anyway.
+  // Dirty bindings include: gl.FRAMEBUFFER_BINDING, gl.CURRENT_PROGRAM,
+  // gl.ARRAY_BUFFER_BINDING, gl.ELEMENT_ARRAY_BUFFER_BINDING,
+  // and gl.TEXTURE_BINDING_2D for texture unit 0
+  // Warning: enabling this might lead to rendering issues.
+  //DIRTY_SUBMIT_FRAME_BINDINGS: true // default: false
+};
+</script>
+
+<!--
+  A polyfill for Promises. Needed for IE and Edge.
+-->
+<script src="node_modules/es6-promise/dist/es6-promise.min.js"></script>
+
+<!--
+  three.js 3d library
+-->
+<script src="js/three.min.js"></script>
+
+<!--
+  VRControls.js acquires positional information from connected VR devices and applies the transformations to a three.js camera object.
+-->
+<script src="js/controls/VRControls.js"></script>
+
+<!--
+  VREffect.js handles stereo camera setup and rendering.
+-->
+<script src="js/effects/VREffect.js"></script>
+
+<!--
+  A polyfill for WebVR using the Device{Motion,Orientation}Event API.
+-->
+<script src="js/webvr-polyfill.min.js"></script>
+<script src="js/DeviceOrientationController.js"></script>
+<script src="https://richtr.github.io/doe/doe.js"></script>
+<!--
+  A set of UI controls for entering VR mode.
+-->
+<script src="js/webvr-ui.min.js"></script>
+<script src="js/csg/ThreeCSG.js"></script> 
+<script src="js/loaders/OBJLoader.js"></script> 
+<script src="js/loaders/MTLLoader.js"></script> 
+<script src="rpd.js"></script> <!-- test RPD var -->
+<script src="commonHelpers.js"></script> 
+
+<script src="defaultWHDs.js"></script>
+<script src="parseRPD.js"></script> 
+
+<script src="materialProxy.js"></script>
+<script src="roomObj.js"></script> 
+<script src="itemObj.js"></script> 
+<script src="RoomItem.js"></script> 
+
+
+<script src="exporterHelper.js"></script> 
+<script src="RPDManager.js"></script> 
+<!-- skyBox -->
+<script src="skyBox.js"></script> 
+
+
+<script src="scene2.js"></script>
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script src="js/graham_scan.min.js"></script>
+
+<script>
+function onLoad() {
+  init();
+  animate();
+  var RPDMgmt = new RPDManager();;
+  RPDMgmt.setRPDBox()
+}
+
+
+
+// Request animation frame loop function
+
+
+window.addEventListener('load', onLoad);
+
+</script>
+
+</html>
