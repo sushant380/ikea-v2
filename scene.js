@@ -63,8 +63,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				// Create a three.js scene.
 				scene = new THREE.Scene();
 
-				var axisHelper=new THREE.AxisHelper(3);
-				scene.add(axisHelper)
+				
 				// Create a three.js camera.
 				var aspect = window.innerWidth / window.innerHeight;
 				camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 300);
