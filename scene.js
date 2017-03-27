@@ -333,14 +333,19 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 
 			function animate(timestamp) {
 				var delta = Math.min(timestamp - lastRenderTime, 500);
-				lastRenderTime = timestamp;
-				// Only update controls if we're presenting.
-				if (vrButton.isPresenting()) {
-				    controls.update();
-				}
-				// Render the scene.
-				effect.render(scene, camera);
-				vrDisplay.requestAnimationFrame(animate);
+			  lastRenderTime = timestamp;
+
+			  // Apply rotation to cube mesh
+			  cube.rotation.y += delta * 0.0006;
+
+			  // Only update controls if we're presenting.
+			  if (vrButton.isPresenting()) {
+			    controls.update();
+			  }
+			  // Render the scene.
+			  effect.render(scene, camera);
+
+			  vrDisplay.requestAnimationFrame(animate);
 			}
 
 			function onResize(e) {
