@@ -29,7 +29,7 @@ this.setRPDBox = function() {
 this.initRPD = function() {
 				// parse and handle RPD
 				//console.log("into initRPD")
-				render()
+				//render()
 
 				var convertedRPD = RPDtoJSON(RPD_Raw)
 

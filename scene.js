@@ -275,7 +275,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				// Create 3D objects.
 				
 				// Add cube mesh to your three.js scene
-				scene.add(cube);
+				// scene.add(cube);
 
 				window.addEventListener('resize', onResize, true);
 				window.addEventListener('vrdisplaypresentchange', onResize, true);
