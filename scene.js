@@ -306,6 +306,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				document.getElementById('magic-window').addEventListener('click', function() {
 					vrButton.requestEnterFullscreen();
 				});
+				setupStage();
 			}
 			function onTextureLoaded(texture) {
 				  texture.wrapS = THREE.RepeatWrapping;

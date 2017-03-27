@@ -113,6 +113,8 @@ WebVRConfig = {
 <script src="js/webvr-ui.min.js"></script>
 
 
+<script src="scene.js"></script>
+
 <script>
 // Last time the scene was rendered.
 var lastRenderTime = 0;
@@ -133,7 +135,7 @@ var vrButton;
 function onLoad() {
   // Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
   // Only enable it if you actually need to.
-  var renderer = new THREE.WebGLRenderer({antialias: true});
+  /*var renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setPixelRatio(window.devicePixelRatio);
 
   // Append the canvas element created by the renderer to document body element.
@@ -214,7 +216,8 @@ function onTextureLoaded(texture) {
 
   // For high end VR devices like Vive and Oculus, take into account the stage
   // parameters provided.
-  setupStage();
+  setupStage();*/
+  init();
 }
 
 
