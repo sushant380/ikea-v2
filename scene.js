@@ -274,6 +274,8 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 
 				// Create 3D objects.
 				
+				// Add cube mesh to your three.js scene
+				scene.add(cube);
 
 				window.addEventListener('resize', onResize, true);
 				window.addEventListener('vrdisplaypresentchange', onResize, true);
@@ -330,7 +332,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			  lastRenderTime = timestamp;
 
 			  // Apply rotation to cube mesh
-			  cube.rotation.y += delta * 0.0006;
+			  // cube.rotation.y += delta * 0.0006;
 
 			  // Only update controls if we're presenting.
 			  if (vrButton.isPresenting()) {
