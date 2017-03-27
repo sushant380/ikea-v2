@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-
 <html lang="en">
-<head>
-<title>Web VR boilerplate</title>
-<meta charset="utf-8">
+	<head>
+		<title>my test</title>
+		<meta charset="utf-8">
+		<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<style>
-body {
+		<!-- <meta http-equiv="origin-trial" data-feature="WebVR" data-expires="2017-05-05" content="AiOmPyYE3PBjFkT1/1Zgz7Ml7fy4Fx9dG0mYZq9vmvzXll8xPv/ZyRObmug3gwQsBKx88nLOiIlFPrjQCtElhwsAAABmeyJvcmlnaW4iOiJodHRwczovL3N1c2hhbnQzODAuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJWUiIsImV4cGlyeSI6MTQ5Mzk5MDA3NSwiaXNTdWJkb21haW4iOnRydWV9">  -->
+		
+		<style>
+			body {
   width: 100%;
   height: 100%;
   background-color: #000;
@@ -35,20 +37,126 @@ a#magic-window {
   color: white;
   margin-top: 1em;
 }
-</style>
-</head>
+			div.floating {
+				color : #ffffff;
+				background : #000000;
+				opacity : 0.8;
+				width : 80%;
+				height : 80%;
+				position : absolute;
+				left : 10%;
+				top : 10%;
+				border : 1px solid #555555;
+				padding : 10px;
+				display : none;
+				overflow : auto;
+				z-index: 100;
+			}
+			.radio-thumbnail > input {
+  display: none;
+}
 
-<body>
-  <div id="ui">
-    <div id="vr-button"></div>
-    <a id="magic-window" href="#">Try it without a headset</a>
-  </div>
-</body>
+.radio-thumbnail > :checked + .thumbnail {
+  border-color: #66afe9;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+}
 
-<script>
-/*
- * Debug parameters.
- */
+.radio-thumbnail > :disabled + .thumbnail {
+  opacity: .5;
+}
+	.icon-fullscreen {
+		background-image:'img/fullscreen.png';
+ 		background-position: center center;
+	}
+		</style>
+	
+	</head>
+	<body>
+<!-- 	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+ <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
+     <script src="js/bootstrap.min.js"></script>
+     <script src="js/bootstrap-select.js"></script>
+<link rel="stylesheet" type="text/css" href="js/eazyWizard.css">
+			<script src="js/eazyWizard.js"></script>	
+	<link rel="stylesheet" type="text/css" href="js/contextMenu.css"> -->
+		<!-- THREE related JS -->
+		<script src="js/three.min.js"></script>		
+		<script src="js/controls/VRControls.js"></script>
+		<script src="js/effects/VREffect.js"></script>
+		<!--
+  A polyfill for WebVR using the Device{Motion,Orientation}Event API.
+-->
+<script src="js/webvr-polyfill.min.js"></script>
+
+<!--
+  A set of UI controls for entering VR mode.
+-->
+<script src="js/webvr-ui.min.js"></script>
+		<!-- <script src="js/csg/ThreeCSG.js"></script> 
+		<script src="js/controls/OrbitControls.js"></script>
+		<script src="itemInteraction.js"></script>
+		<script src="js/Detector.js"></script> 
+		
+		<script src="js/effects/StereoEffect.js"></script> 
+		<script src="js/controls/DeviceOrientationControls.js"></script> -->
+		<!-- cardboard -->
+		
+		<!-- Vive -->
+		
+		<!-- <script src="js/vr/ViveController.js"></script>
+		<script src="js/vr/WebVR.js"></script>		
+		<script src="js/loaders/OBJLoader.js"></script>  -->
+		<!-- <script src="js/loaders/MTLLoader.js"></script> 
+		<script src="js/vr/vivecontrollerInteraction.js"></script>  -->
+		<!-- Vive -->
+
+		<!-- Custom OBJ export --><!-- modified -->		
+		<!-- <script src="js/ObjExporter.js"></script>  -->
+		<!-- <script src="js/jszip/jszip.min.js"></script>
+		
+		
+		<script src="js/graham_scan.min.js"></script> 
+		<script src="js/detect.min.js"></script>
+		<script src="js/GeometryUtils.js"></script>
+		<script src="js/jquery.steps.js"></script>
+		
+		
+		<script src="rpd.js"></script> 
+		<script src="commonHelpers.js"></script> 
+		
+		<script src="defaultWHDs.js"></script>
+		<script src="parseRPD.js"></script> 
+		
+		<script src="materialProxy.js"></script>
+		<script src="roomObj.js"></script> 
+		<script src="itemObj.js"></script> 
+		<script src="RoomItem.js"></script> 
+
+		
+		<script src="exporterHelper.js"></script> 
+		<script src="RPDManager.js"></script> 
+		
+		<script src="skyBox.js"></script>  -->
+
+		<script src="scene.js"></script> 
+		<!-- <script src="js/Tween.js"></script> 
+		<script src="js/contextMenu.js"></script> 
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-colorpicker.min.css">
+		<script src="js/bootstrap-colorpicker.min.js"></script> 
+		<script src="js/SimplifyModifier.js"></script>  -->
+		
+		
+<!--		<div style="position: absolute; top: 10px; width: 10%; text-align: left; ">
+			RPD: <br><textarea id="rpd" value=""></textarea><br>
+			<a href="#" onclick="setRPD();"> Update Room</a>
+
+			<!--<a href="#" onclick="exportToJSON();"> Export Scene to JSON</a>
+				<br>	 	 
+
+		</div>  -->
+		<script>
 WebVRConfig = {
   /**
    * webvr-polyfill configuration
@@ -80,205 +188,193 @@ WebVRConfig = {
   // Warning: enabling this might lead to rendering issues.
   //DIRTY_SUBMIT_FRAME_BINDINGS: true // default: false
 };
-</script>
 
-<!--
-  A polyfill for Promises. Needed for IE and Edge.
--->
-<script src="node_modules/es6-promise/dist/es6-promise.min.js"></script>
+		var RPDMgmt=undefined;
+		function onLoad(){
+			
 
-<!--
-  three.js 3d library
--->
-<script src="js/three.min.js"></script>
+		init(); // start scene
+		/*
+		RPDMgmt = new RPDManager()
 
-<!--
-  VRControls.js acquires positional information from connected VR devices and applies the transformations to a three.js camera object.
--->
-<script src="js/controls/VRControls.js"></script>
-
-<!--
-  VREffect.js handles stereo camera setup and rendering.
--->
-<script src="js/effects/VREffect.js"></script>
-
-<!--
-  A polyfill for WebVR using the Device{Motion,Orientation}Event API.
--->
-<script src="js/webvr-polyfill.min.js"></script>
-
-<!--
-  A set of UI controls for entering VR mode.
--->
-<script src="js/webvr-ui.min.js"></script>
-
-
-<script src="scene.js"></script>
-
-<script>
-// Last time the scene was rendered.
-var lastRenderTime = 0;
-// Currently active VRDisplay.
-var vrDisplay;
-// How big of a box to render.
-var boxSize = 5;
-// Various global THREE.Objects.
-var scene;
-var cube;
-var controls;
-var effect;
-var camera;
-// EnterVRButton for rendering enter/exit UI.
-var vrButton;
-
-
-function onLoad() {
-  // Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
-  // Only enable it if you actually need to.
-  /*var renderer = new THREE.WebGLRenderer({antialias: true});
-  renderer.setPixelRatio(window.devicePixelRatio);
-
-  // Append the canvas element created by the renderer to document body element.
-  document.body.appendChild(renderer.domElement);
-
-  // Create a three.js scene.
-  scene = new THREE.Scene();
-
-  // Create a three.js camera.
-  var aspect = window.innerWidth / window.innerHeight;
-  camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 10000);
-
-  controls = new THREE.VRControls(camera);
-  controls.standing = true;
-  camera.position.y = controls.userHeight;
-
-  // Apply VR stereo rendering to renderer.
-  effect = new THREE.VREffect(renderer);
-  effect.setSize(window.innerWidth, window.innerHeight);
-
-  // Add a repeating grid as a skybox.
-  var loader = new THREE.TextureLoader();
-  loader.load('img/box.png', onTextureLoaded);
-
-  // Create 3D objects.
-  var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-  var material = new THREE.MeshNormalMaterial();
-  cube = new THREE.Mesh(geometry, material);
-
-  // Position cube mesh to be right in front of you.
-  cube.position.set(0, controls.userHeight, -1);
-
-  // Add cube mesh to your three.js scene
-  scene.add(cube);
-
-  window.addEventListener('resize', onResize, true);
-  window.addEventListener('vrdisplaypresentchange', onResize, true);
-
-  // Initialize the WebVR UI.
-  var uiOptions = {
-    color: 'black',
-    background: 'white',
-    corners: 'square'
-  };
-  vrButton = new webvrui.EnterVRButton(renderer.domElement, uiOptions);
-  vrButton.on('exit', function() {
-    camera.quaternion.set(0, 0, 0, 1);
-    camera.position.set(0, controls.userHeight, 0);
-  });
-  vrButton.on('hide', function() {
-    document.getElementById('ui').style.display = 'none';
-  });
-  vrButton.on('show', function() {
-    document.getElementById('ui').style.display = 'inherit';
-  });
-  document.getElementById('vr-button').appendChild(vrButton.domElement);
-  document.getElementById('magic-window').addEventListener('click', function() {
-    vrButton.requestEnterFullscreen();
-  });
-}
-
-function onTextureLoaded(texture) {
-  texture.wrapS = THREE.RepeatWrapping;
-  texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(boxSize, boxSize);
-
-  var geometry = new THREE.BoxGeometry(boxSize, boxSize, boxSize);
-  var material = new THREE.MeshBasicMaterial({
-    map: texture,
-    color: 0x01BE00,
-    side: THREE.BackSide
-  });
-
-  // Align the skybox to the floor (which is at y=0).
-  skybox = new THREE.Mesh(geometry, material);
-  skybox.position.y = boxSize/2;
-  scene.add(skybox);
-
-  // For high end VR devices like Vive and Oculus, take into account the stage
-  // parameters provided.
-  setupStage();*/
-  init();
-}
-
-
-
-// Request animation frame loop function
-function animate(timestamp) {
-  var delta = Math.min(timestamp - lastRenderTime, 500);
-  lastRenderTime = timestamp;
-
-  // Apply rotation to cube mesh
-  cube.rotation.y += delta * 0.0006;
-
-  // Only update controls if we're presenting.
-  if (vrButton.isPresenting()) {
-    controls.update();
-  }
-  // Render the scene.
-  effect.render(scene, camera);
-
-  vrDisplay.requestAnimationFrame(animate);
-}
-
-function onResize(e) {
-  effect.setSize(window.innerWidth, window.innerHeight);
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-}
-
-// Get the HMD, and if we're dealing with something that specifies
-// stageParameters, rearrange the scene.
-function setupStage() {
-  navigator.getVRDisplays().then(function(displays) {
-    if (displays.length > 0) {
-      vrDisplay = displays[0];
-      if (vrDisplay.stageParameters) {
-        setStageDimensions(vrDisplay.stageParameters);
-      }
-      vrDisplay.requestAnimationFrame(animate);
-    }
-  });
-}
-
-function setStageDimensions(stage) {
-  // Make the skybox fit the stage.
-  var material = skybox.material;
-  scene.remove(skybox);
-
-  // Size the skybox according to the size of the actual stage.
-  var geometry = new THREE.BoxGeometry(stage.sizeX, boxSize, stage.sizeZ);
-  skybox = new THREE.Mesh(geometry, material);
-
-  // Place it on the floor.
-  skybox.position.y = boxSize/2;
-  scene.add(skybox);
-
-  // Place the cube in the middle of the scene, at user height.
-  cube.position.set(0, controls.userHeight, 0);
-}
+		RPDMgmt.setRPDBox()*/
+		}
+		/** start exporter test **/
 
 window.addEventListener('load', onLoad);
 
-</script>
+		</script>
+		 <div id="ui">
+    <div id="vr-button"></div>
+    <a id="magic-window" href="#">Try it without a headset</a>
+  </div>
+	<!-- <div id="colorPanel" style="display:hidden;"></div>
+	<div class="context-menu-one box menu-1"></div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Customize WorkTop</h4>
+                </div>
+                <div class="modal-body wizard-content">
+                    
+                    <div class="wizard-step">
+                     
+                       <div class="container-fluid">
+                       	 <fieldset>
+                       	 <legend>Acrylic</legend>
+						  <div class="row texture-group">
+						    <div class="col-xs-2">
+						      <label class="text-center radio-thumbnail">
+						          <input type="radio" name="textures" checked value="1">
+						          <span class="thumbnail">
+						            <img src="img/1.jpg" class="img-responsive"/>
+						            
+						          </span>
+						      </label>
+						    </div>
+						    <div class="col-xs-2">
+						      <label class="text-center radio-thumbnail">
+						        <input type="radio" name="textures" value="2">
+						        <span class="thumbnail">
+						          <img src="img/2.jpg" class="img-responsive"/>
+						          
+						        </span>
+						      </label>
+						    </div>
+						    <div class="col-xs-2">
+						      <label class="text-center radio-thumbnail">
+						        <input type="radio" name="textures" value="3">
+						        <div class="thumbnail">
+						          <img src="img/3.jpg" class="img-responsive"/>
+						          
+						        </div>
+						      </label>
+						    </div>
+						    <div class="col-xs-2">
+						      <label class="text-center radio-thumbnail">
+						        <input type="radio" name="textures" value="4">
+						        <div class="thumbnail">
+						          <img src="img/4.jpg" class="img-responsive"/>
+						          
+						        </div>
+						      </label>
+						    </div>
+						    
+						  </div>
+						  </fieldset>
+						   <fieldset>
+                       			<legend>Ceramic</legend>
+						  		<div class="row texture-group">
+						  			<div class="col-xs-2">
+						      <label class="text-center radio-thumbnail">
+						          <input type="radio" name="textures" checked value="8">
+						          <span class="thumbnail">
+						            <img src="img/8.jpg" class="img-responsive"/>
+						            
+						          </span>
+						      </label>
+						    </div>
+						    <div class="col-xs-2">
+						      <label class="text-center radio-thumbnail">
+						        <input type="radio" name="textures" value="9">
+						        <span class="thumbnail">
+						          <img src="img/9.jpg" class="img-responsive"/>
+						          
+						        </span>
+						      </label>
+						    </div>
+						    <div class="col-xs-2">
+						      <label class="text-center radio-thumbnail">
+						        <input type="radio" name="textures" value="10">
+						        <div class="thumbnail">
+						          <img src="img/10.jpg" class="img-responsive"/>
+						          
+						        </div>
+						      </label>
+						    </div>
+						    <div class="col-xs-2">
+						      <label class="text-center radio-thumbnail">
+						        <input type="radio" name="textures" value="11">
+						        <div class="thumbnail">
+						          <img src="img/11.jpg" class="img-responsive"/>
+						          
+						        </div>
+						      </label>
+						    </div>
+						  		</div>
+						  	</fieldset>
+						  	 <fieldset>
+                       			<legend>Wooden</legend>
+						  		<div class="row texture-group">
+						  			<div class="col-xs-2">
+						      <label class="text-center radio-thumbnail">
+						          <input type="radio" name="textures" checked value="12">
+						          <span class="thumbnail">
+						            <img src="img/12.jpg" class="img-responsive"/>
+						            
+						          </span>
+						      </label>
+						    </div>
+						    <div class="col-xs-2">
+						      <label class="text-center radio-thumbnail">
+						        <input type="radio" name="textures" value="13">
+						        <span class="thumbnail">
+						          <img src="img/13.jpg" class="img-responsive"/>
+						          
+						        </span>
+						      </label>
+						    </div>
+						   
+						  		</div>
+						  	</fieldset>
+						</div>
 
+                    </div>
+                     <div class="wizard-step">
+                     	 Finish<br>
+                     </div>
+                </div>
+                <div class="modal-footer wizard-buttons">
+        
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <script>
+        $(document).on("ready", function(){
+           $("#myModal").wizard({
+            	exit:'Exit',
+            	back:'Back',
+            	next:'Next',
+            	finish:'Finish',
+                onfinish:function(){
+                  	var color=$('.texture-group input:radio:checked').val();
+                  	var shape=$('.btn-group input:radio:checked').val()
+                    drawShape("I",color);
+                }
+            });
+             $('#colorPanel').colorpicker({
+	            color: '#ffaa00',
+	            container: true,
+	            inline: true,
+
+	        }).on('changeColor',function(a,b,c){
+	        	var color=a.color;
+	        	
+	        	for(var n=0;n<myRoom.allWallMeshes.length;n++){
+	        		myRoom.allWallMeshes[n].material.color.set(color.toHex());
+	        	}
+	        	for(var q=0;q<scene.children.length;q++){
+	        		if(scene.children[q].name.indexOf('Obstacle')>-1){
+	        			scene.children[q].material.color.set(color.toHex());
+	        		}
+	        	}
+	        	render();
+	        });
+        });
+    </script> -->
+	</body>
 </html>
