@@ -13,20 +13,20 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			var interactiveObjects = [];
 			var interactiveRoomObjs = []
 			
-			//var plane = new THREE.Plane();
+			var plane = new THREE.Plane();
 			var raycaster
-			//var mouse = new THREE.Vector2(),
-			//offset = new THREE.Vector3(),
-			//intersection = new THREE.Vector3(),
-			var INTERSECTED, SELECTED,
+			var mouse = new THREE.Vector2(),
+			offset = new THREE.Vector3(),
+			intersection = new THREE.Vector3(),
+			INTERSECTED, SELECTED,
 			container;
 			
-			//clock = new THREE.Clock();	
+			clock = new THREE.Clock();	
 			
 			var controller1, controller2; //vive
 			
-			/*var skyBoxDefault = new SkyBox()
-			skyBoxDefault.drawShaderSkybox()*/
+			var skyBoxDefault = new SkyBox()
+			skyBoxDefault.drawShaderSkybox()
 			
 			var ViveControlInteractions // test of interacting with vive
 			
@@ -54,8 +54,27 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				/** **/
 				
 				personStandingHeight = 1.6 // default standing height
+				var renderer = new THREE.WebGLRenderer({antialias: true});
+				renderer.setPixelRatio(window.devicePixelRatio);
+
+				// Append the canvas element created by the renderer to document body element.
+				document.body.appendChild(renderer.domElement);
+
+				// Create a three.js scene.
+				scene = new THREE.Scene();
+
+				// Create a three.js camera.
+				var aspect = window.innerWidth / window.innerHeight;
+				camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 10000);
+
+				controls = new THREE.VRControls(camera);
+				controls.standing = true;
+				camera.position.y = controls.userHeight;
+
+				// Apply VR stereo rendering to renderer.
+				effect = new THREE.VREffect(renderer);
+				effect.setSize(window.innerWidth, window.innerHeight);
 				
-				/*scene = new THREE.Scene();
 				// LIGHTS
 				var hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
 				hemiLight.position.set( 0, 0, 500 );
@@ -75,7 +94,9 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				var dirLight2 = new THREE.DirectionalLight( 0xffffff, 0.3 );
 				dirLight2.castShadow = true; 
 				dirLight2.position.set(0,4,0)
-				scene.add( dirLight2 );				
+				scene.add( dirLight2 );					
+				/*scene = new THREE.Scene();
+							
 //				var helper = new THREE.CameraHelper( dirLight2.shadow.camera );
 //				scene.add( helper );			
 
@@ -246,27 +267,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				// RPD box
 				//controlsUI.innerHTML=CamConUI;
 				// camera.position.set(0,1.08,-1.6749995000000002);
-				var renderer = new THREE.WebGLRenderer({antialias: true});
-				renderer.setPixelRatio(window.devicePixelRatio);
-
-				// Append the canvas element created by the renderer to document body element.
-				document.body.appendChild(renderer.domElement);
-
-				// Create a three.js scene.
-				scene = new THREE.Scene();
-
-				// Create a three.js camera.
-				var aspect = window.innerWidth / window.innerHeight;
-				camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 10000);
-
-				controls = new THREE.VRControls(camera);
-				controls.standing = true;
-				camera.position.y = controls.userHeight;
-
-				// Apply VR stereo rendering to renderer.
-				effect = new THREE.VREffect(renderer);
-				effect.setSize(window.innerWidth, window.innerHeight);
-
+				
 				// Add a repeating grid as a skybox.
 				var loader = new THREE.TextureLoader();
 				loader.load('img/box.png', onTextureLoaded);
