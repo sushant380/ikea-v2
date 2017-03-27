@@ -378,7 +378,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			  skybox = new THREE.Mesh(geometry, material);
 
 			  // Place it on the floor.
-			  skybox.position.y = -10;
+			  skybox.position.y = boxSize/2;
 			  scene.add(skybox);
 
 			  // Place the cube in the middle of the scene, at user height.
