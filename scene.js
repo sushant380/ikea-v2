@@ -63,9 +63,11 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				// Create a three.js scene.
 				scene = new THREE.Scene();
 
+				var axisHelper=new THREE.AxisHelper(3);
+				scene.add(axisHelper)
 				// Create a three.js camera.
 				var aspect = window.innerWidth / window.innerHeight;
-				camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 10000);
+				camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 300);
 
 				controls = new THREE.VRControls(camera);
 				controls.standing = true;
@@ -269,9 +271,9 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				// camera.position.set(0,1.08,-1.6749995000000002);
 				
 				// Add a repeating grid as a skybox.
-				var loader = new THREE.TextureLoader();
+				/*var loader = new THREE.TextureLoader();
 				loader.load('img/box.png', onTextureLoaded);
-
+*/
 				// Create 3D objects.
 				
 				// Add cube mesh to your three.js scene
@@ -329,8 +331,8 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 
 			function animate(timestamp) {
 				var delta = Math.min(timestamp - lastRenderTime, 500);
-			  lastRenderTime = timestamp;
-
+			  	lastRenderTime = timestamp;
+				dirLight.position.set( camera.position.x, camera.position.y, camera.position.z );
 			  // Apply rotation to cube mesh
 			  // cube.rotation.y += delta * 0.0006;
 
