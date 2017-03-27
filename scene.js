@@ -273,15 +273,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				loader.load('img/box.png', onTextureLoaded);
 
 				// Create 3D objects.
-				var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-				var material = new THREE.MeshNormalMaterial();
-				cube = new THREE.Mesh(geometry, material);
-
-				// Position cube mesh to be right in front of you.
-				cube.position.set(0, controls.userHeight, -1);
-
-				// Add cube mesh to your three.js scene
-				scene.add(cube);
+				
 
 				window.addEventListener('resize', onResize, true);
 				window.addEventListener('vrdisplaypresentchange', onResize, true);
