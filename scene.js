@@ -4,7 +4,7 @@ clock,exporterHelpers,personStandingHeight, controlsUI, debugUI,roundedRectShape
 var lastRenderTime = 0,skybox;
 // Currently active VRDisplay.
 // How big of a box to render.
-var boxSize = 10;
+var boxSize = 5;
 // Various global THREE.Objects.
 
 var cube;// EnterVRButton for rendering enter/exit UI.
@@ -124,7 +124,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				
 				controlsUI = document.createElement( 'div' );
 				controlsUI.style="position: absolute; top: 10px;  width: 100%; text-align: left; "
-				container.appendChild( controlsUI );*/
+				container.appendChild( controlsUI );
 				var CamConUI="" 
 	
 				// init persp cam
@@ -150,33 +150,14 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 					CamConUI += "</div><div class=\"col-md-1\"><button data-toggle=\"tooltip\" data-placement=\"left\" title=\"Full Screeen\" style=\"margin-top:5px;\" type=\"button\" class=\"btn pull-right\" onclick=\"fullscreen();return false;\"><img style=\"width:32px;height:32px;\" src=\"img/fullscreen.png\"></img></button>"
 					CamConUI += "<button type=\"button\"  class=\"btn pull-right\" data-toggle=\"modal\" data-target=\"#myModal\" title=\"Customize Worktop\" style=\"margin-top:5px;\"> <img data-toggle=\"tooltip\" data-placement=\"left\" style=\"width:32px;height:32px;\" src=\"img/customize.png\"></img></button>";
 					// Orto cam
-					/*CamConUI += "<a href=\"#\" onclick=\"setPerspective();return false;\">Perspective</a> | "
-					//
-					CamConUI += "<a href=\"#\" onclick=\"setOrthographic();return false;\"> Orthographic</a> | "
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive();return false;\">Vive</a>"	
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive(0.5);return false;\">Vive 0.5m</a>"
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive(1);return false;\">Vive 1m</a>"
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive(2);return false;\">Vive 2m</a>"*/
-					//CamConUI += "<button type=\"button\" class=\"btn btn-primary\" onclick=\"setPerspective();;return false;\" checked=true>Orbit Control<br></button>"
-					//CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=1.8;stopAnimation=false;setDeviceOrientationControl();;return false;\">Animate<br>"
-					//CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=1.8;stopAnimation=true;setPerspective();;return false;\">Stop<br>"
 					CamConUI+= "<button type=\"button\" style=\"margin-top:5px;\" class=\"btn pull-right\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Open\" onclick=\"personStandingHeight=1.8;stopAnimation=true;setOpen();return false;\"><img style=\"width:32px;height:32px;\" src=\"img/open.png\"></img></button>";
 					CamConUI+= "<button type=\"button\" style=\"margin-top:5px;\" class=\"btn pull-right\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Close\" onclick=\"personStandingHeight=1.8;stopAnimation=true;setClose();return false;\"><img style=\"width:32px;height:32px;\" src=\"img/close.png\"></img></button>";
 					CamConUI+= "<button id=\"colorPalette\" type=\"button\" style=\"margin-top:5px;\" class=\"btn pull-right\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Paint\" ><img style=\"width:32px;height:32px;\" src=\"img/paint.png\"></img></button>";
 					CamConUI+= "<button id=\"vreffect\" onclick=\"setStereoEffect();return false;\" type=\"button\" style=\"margin-top:5px;\" class=\"btn pull-right\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"VR\" ><img style=\"width:32px;height:32px;\" src=\"img/vr.png\"></img></button>";
 					CamConUI+= "<button id=\"vreffect\" onclick=\"exporterHelpers.exportToObj();\" type=\"button\" style=\"margin-top:5px;\" class=\"btn pull-right\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"VR\" ><img style=\"width:32px;height:32px;\" src=\"img/export-icon.png\"></img></button>";
-					/*CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=0.5;setDeviceOrientationControl();;return false;\">Toddler<br>"
-					CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=1.3;setDeviceOrientationControl();;return false;\">Kid<br>"
-					CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=1.6;setDeviceOrientationControl();;return false;\">Lady<br>"
-					*/
 					
-				//	CamConUI += "<br><button type=\"button\" class=\"btn btn-primary\"  onclick=\"exporterHelpers.exportToObj();\"> Export Scene to OBJ</a>"
-				//	CamConUI += "<button type=\"button\" class=\"btn btn-primary\"  onclick=\"startRuler();\"> Ruler</button>"
+					
 							
-					 CamConUI+="</div></div>";
-
-		
-					/**<a href="#" onclick="exportToJSON();"> Export Scene to JSON</a>**/ //TODO			
 					
 			
 				}
@@ -198,24 +179,10 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 					
 					 CamConUI+="</div></div>";
 					//CamConUI += "<br><a href=\"#\"  onclick=\"exporterHelpers.exportToObj();\"> Export Scene to OBJ</a><br>"
-					/*CamConUI += "<br><a href=\"#\" onclick=\"fullscreen();return false;\">Fullscreen</a>"
-					CamConUI += "<br><input type=\"radio\" name=\"controlModeAndEffect\" onclick=\"setPerspective();\" checked=true>Orbit Control<br>"
-					CamConUI += "<br><input type=\"radio\" name=\"controlModeAndEffect\" onclick=\"setDeviceOrientationControl();\">Device Control<br>"
-					CamConUI += "<br><input type=\"radio\" name=\"controlModeAndEffect\" onclick=\"personStandingHeight=1.8;setDeviceOrientationControl();\">Man<br>"
-					CamConUI += "<br><input type=\"radio\" name=\"controlModeAndEffect\" onclick=\"personStandingHeight=0.5;setDeviceOrientationControl();\">Toddler<br>"
-					CamConUI += "<br><input type=\"radio\" name=\"controlModeAndEffect\" onclick=\"personStandingHeight=1.3;setDeviceOrientationControl();\">Kid<br>"
-					CamConUI += "<br><input type=\"radio\" name=\"controlModeAndEffect\" onclick=\"personStandingHeight=1.6;setDeviceOrientationControl();\">Lady<br>"
-
-						*/			
+								
 					//CamConUI += "<br><a href=\"#\" onclick=\"fullscreen();return false;\">Fullscreen</a><br>"
 					// Orto cam
-					/*CamConUI += "<a href=\"#\" onclick=\"setPerspective();return false;\">Perspective</a> | "
-					//
-					CamConUI += "<a href=\"#\" onclick=\"setOrthographic();return false;\"> Orthographic</a> | "
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive();return false;\">Vive</a>"	
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive(0.5);return false;\">Vive 0.5m</a>"
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive(1);return false;\">Vive 1m</a>"
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive(2);return false;\">Vive 2m</a>"*/
+					
 					//CamConUI += "<br><a href=\"#\" onclick=\"setPerspective();;return false;\" checked=true>Orbit Control<br>"
 					//CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=1.8;stopAnimation=false;setDeviceOrientationControl();;return false;\">Animate<br>"
 					//CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=1.8;stopAnimation=true;setPerspective();;return false;\">Stop<br>"
@@ -241,23 +208,9 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 					CamConUI+= "<button id=\"colorPalette\" type=\"button\" style=\"margin-top:5px;\" class=\"btn pull-right\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Paint\" ><img style=\"width:32px;height:32px;\" src=\"img/paint.png\"></img></button>";
 					CamConUI+= "<button id=\"vreffect\" onclick=\"setStereoEffect();return false;\" type=\"button\" style=\"margin-top:5px;\" class=\"btn pull-right\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"VR\" ><img style=\"width:32px;height:32px;\" src=\"img/vr.png\"></img></button>";
 					 CamConUI+="</div></div>";
-					/*CamConUI += "<br><a href=\"#\" onclick=\"fullscreen();return false;\">Fullscreen</a>"
-					CamConUI += "<br><a href=\"#\" onclick=\"setPerspective();;return false;\" checked=true>Orbit Control<br>"
-				CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=1.8;setDeviceOrientationControl();;return false;\">Man<br>"
-					CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=0.5;setDeviceOrientationControl();;return false;\">Toddler<br>"
-					CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=1.3;setDeviceOrientationControl();;return false;\">Kid<br>"
-					CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=1.6;setDeviceOrientationControl();;return false;\">Lady<br>"
-					CamConUI += "<br><a href=\"#\" onclick=\"setStereoEffect();return false;\">Toggle Stereo</a>"
-
-*/					//CamConUI += "<br><button type=\"button\" class=\"btn btn-primary\" onclick=\"fullscreen();return false;\">Fullscreen</a><br>"
+								//CamConUI += "<br><button type=\"button\" class=\"btn btn-primary\" onclick=\"fullscreen();return false;\">Fullscreen</a><br>"
 					// Orto cam
-					/*CamConUI += "<a href=\"#\" onclick=\"setPerspective();return false;\">Perspective</a> | "
-					//
-					CamConUI += "<a href=\"#\" onclick=\"setOrthographic();return false;\"> Orthographic</a> | "
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive();return false;\">Vive</a>"	
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive(0.5);return false;\">Vive 0.5m</a>"
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive(1);return false;\">Vive 1m</a>"
-					CamConUI += "<br><a href=\"#\" onclick=\"setVive(2);return false;\">Vive 2m</a>"*/
+					
 					//CamConUI += "<br><a href=\"#\" onclick=\"setPerspective();;return false;\" checked=true>Orbit Control<br>"
 					//CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=1.8;stopAnimation=false;setDeviceOrientationControl();;return false;\">Animate<br>"
 					//CamConUI += "<br><a href=\"#\" onclick=\"personStandingHeight=1.8;stopAnimation=true;setPerspective();;return false;\">Stop<br>"
@@ -267,7 +220,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 					//setDeviceOrientationControl()
 					//setPerspective() // default
 
-				}
+				}*/
 				
 				/** deviceorientation **/
 				
@@ -357,17 +310,23 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			function onTextureLoaded(texture) {
 				  texture.wrapS = THREE.RepeatWrapping;
 				  texture.wrapT = THREE.RepeatWrapping;
-				  texture.repeat.set(5,5);
+				  texture.repeat.set(boxSize, boxSize);
 
-			  	var geometry = new THREE.Box3Geometry(boxSize, boxSize, boxSize);
-			  	var material = new THREE.MeshBasicMaterial({
-			   		map: texture,
-			  		side: THREE.BackSide
-			  	});
-				// Align the s-kybox to the floor (which is at y=0).
-			  	skybox = new THREE.Mesh(geometry, material);
-			  	skybox.position.y = -2;
-			  	scene.add(skybox);
+				  var geometry = new THREE.BoxGeometry(boxSize, boxSize, boxSize);
+				  var material = new THREE.MeshBasicMaterial({
+				    map: texture,
+				    color: 0x01BE00,
+				    side: THREE.BackSide
+				  });
+
+				  // Align the skybox to the floor (which is at y=0).
+				  skybox = new THREE.Mesh(geometry, material);
+				  skybox.position.y = boxSize/2;
+				  scene.add(skybox);
+
+				  // For high end VR devices like Vive and Oculus, take into account the stage
+				  // parameters provided.
+				  setupStage();
 				// For high end VR devices like Vive and Oculus, take into account the stage
 				// parameters provided.
 			}
