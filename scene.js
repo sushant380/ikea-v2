@@ -13,20 +13,20 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			var interactiveObjects = [];
 			var interactiveRoomObjs = []
 			
-			var plane = new THREE.Plane();
+			//var plane = new THREE.Plane();
 			var raycaster
-			var mouse = new THREE.Vector2(),
-			offset = new THREE.Vector3(),
-			intersection = new THREE.Vector3(),
-			INTERSECTED, SELECTED,
+			//var mouse = new THREE.Vector2(),
+			//offset = new THREE.Vector3(),
+			//intersection = new THREE.Vector3(),
+			var INTERSECTED, SELECTED,
 			container;
 			
-			clock = new THREE.Clock();	
+			//clock = new THREE.Clock();	
 			
 			var controller1, controller2; //vive
 			
-			var skyBoxDefault = new SkyBox()
-			skyBoxDefault.drawShaderSkybox()
+			/*var skyBoxDefault = new SkyBox()
+			skyBoxDefault.drawShaderSkybox()*/
 			
 			var ViveControlInteractions // test of interacting with vive
 			
@@ -41,13 +41,13 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				controls = undefined
 				dirLight = undefined
 				
-				raycaster = new THREE.Raycaster();
+			//	raycaster = new THREE.Raycaster();
 				interactiveObjects = []
-				plane = new THREE.Plane();
+			/*	plane = new THREE.Plane();
 				mouse = new THREE.Vector2()
 				offset = new THREE.Vector3()
 				intersection = new THREE.Vector3()
-				INTERSECTED = undefined
+			*/	INTERSECTED = undefined
 				SELECTED = undefined
 				container = undefined
 				effect
