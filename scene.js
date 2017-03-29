@@ -367,7 +367,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 
 			function setStageDimensions(stage) {
 			  // Make the skybox fit the stage.
-			  var material = skybox.material;
+			  /*var material = skybox.material;
 			  scene.remove(skybox);
 
 			  // Size the skybox according to the size of the actual stage.
@@ -376,7 +376,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 
 			  // Place it on the floor.
 			  skybox.position.y = boxSize/2;
-			  scene.add(skybox);
+			  scene.add(skybox);*/
 
 			  // Place the cube in the middle of the scene, at user height.
 			  camera.position.set(1, controls.userHeight, 6);
