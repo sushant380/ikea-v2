@@ -74,7 +74,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				controls.connect();
 
 				// Apply VR stereo rendering to renderer.
-				effect = new THREE.VREffect(renderer);
+				effect = new THREE.StereoEffect(renderer);
 				effect.setSize(window.innerWidth, window.innerHeight);
 				
 				// LIGHTS
@@ -291,7 +291,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				// scene.add(cube);
 				setupControllerEventHandlers( controls );
 
-				window.addEventListener('resize', onResize, true);
+				/*window.addEventListener('resize', onResize, true);
 				window.addEventListener('vrdisplaypresentchange', onResize, true);
 
 				// Initialize the WebVR UI.
@@ -314,7 +314,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				document.getElementById('vr-button').appendChild(vrButton.domElement);
 				document.getElementById('magic-window').addEventListener('click', function() {
 					vrButton.requestEnterFullscreen();
-				});
+				});*/
 				setupStage();
 				ABSULIT.pointer.init();
 			}
@@ -395,17 +395,17 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				var delta = Math.min(timestamp - lastRenderTime, 500);
 			  	lastRenderTime = timestamp;
 				dirLight.position.set( camera.position.x, camera.position.y, camera.position.z );
-				if (vrButton.isPresenting()) {
+				//if (vrButton.isPresenting()) {
 			    controls.update();
-			  }
-				renderer.render( scene, camera );
+			  //}
+				effect.render( scene, camera );
 				//requestAnimationFrame( animate );
-				 vrDisplay.requestAnimationFrame(animate);
+				
 			  var handRightRotation = handRight.rotation.toVector3();
     			handRightRotation.normalize();
     			//console.log(handRight.position, handRight.rotation);
     			ABSULIT.pointer.update(handRight.position, handRight.rotation);
-
+				requestAnimationFrame(animate);
 			}
 
 			function onResize(e) {
