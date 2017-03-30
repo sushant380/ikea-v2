@@ -14,7 +14,11 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
         lineMaterial = new THREE.LineBasicMaterial({color: 0x00FF00}),
         lineGeometry = new THREE.Geometry(),
         circleGeometry = new THREE.Geometry();
-
+    object.selectionBox = new THREE.BoxHelper();
+    object.selectionBox.material.depthTest = false;
+    object.selectionBox.material.transparent = true;
+    object.selectionBox.visible = false;
+    object.box= new THREE.Box3();
 
     object.objects = [];
     object.IN = 'in';
@@ -23,7 +27,7 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
     lineGeometry.vertices.push(new THREE.Vector3(0, 0.1, 0.0));
     lineGeometry.vertices.push(new THREE.Vector3(0, 0.0, -10.0));
 
-    circleGeometry = new THREE.CircleGeometry( 1, 64 );
+    circleGeometry = new THREE.CircleGeometry( 0.03, 64 );
     circleGeometry.vertices.shift();
 
     object.line = new THREE.Line(lineGeometry, lineMaterial);
@@ -55,12 +59,12 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
 
         lineContainer.position.x = camera.position.x + cameraContainer.position.x;
         lineContainer.position.y = camera.position.y + cameraContainer.position.y;
-        lineContainer.position.z = camera.position.z + cameraContainer.position.z;
+        lineContainer.position.z = camera.position.z ;
 
         lineContainer.rotation.copy(camera.rotation);
 
 
-        var collisions = raycaster.intersectObjects(object.objects);
+        var collisions = raycaster.intersectObjects(interactiveObjects);
 
         if (collisions.length > 0) {
             //console.log('---- collisions[0].distance: ', collisions[0].distance);
@@ -70,6 +74,8 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
 
                 if (intersected) {
                     //intersected.material.emissive.setHex( intersected.originalHex );//
+                    var SELECTED=this.findParent(intersected)
+                    this.updateBox(SELECTED);
                 }
                 intersected = collisions[0].object;
                 //intersected.originalHex = intersected.material.emissive.getHex();//
@@ -87,6 +93,28 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
         }
 
     };
+    object.findParent=function(object){
+            var parent;
+            if(object.isHost){
+                parent=object;
+            }else if(object.parent){
+                parent = this.findParent(object.parent);
+            }else{
+                parent= object;
+            }
+            return parent;
+        };
+    object.updateBox=function(object){
+            this.box.setFromObject( object );
+                            if ( this.box.isEmpty() === false ) {    
+                                this.selectionBox.update( this.box );
+                                this.selectionBox.visible = true;
+                            }
+                            if(scene && this.box){
+                                scene.add(this.selectionBox);
+                            }
+
+        };
 
     return object;
 

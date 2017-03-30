@@ -360,7 +360,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			  vrDisplay.requestAnimationFrame(animate);
 			  var handRightRotation = handRight.rotation.toVector3();
     			handRightRotation.normalize();
-    			console.log(handRight.position, handRight.rotation);
+    			//console.log(handRight.position, handRight.rotation);
     			ABSULIT.pointer.update(handRight.position, handRight.rotation);
 			}
 
@@ -398,7 +398,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			  scene.add(skybox);*/
 
 			  // Place the cube in the middle of the scene, at user height.
-			  camera.position.set(1, controls.userHeight, 6);
+			  camera.position.set(0, controls.userHeight, 0);
 			}
 
 			function changeRpd(){
