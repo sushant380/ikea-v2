@@ -344,6 +344,9 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			  effect.render(scene, camera);
 
 			  vrDisplay.requestAnimationFrame(animate);
+			  var handRightRotation = handRight.rotation.toVector3();
+    			handRightRotation.normalize();
+    			ABSULIT.pointer.update(handRight.position, handRight.rotation);
 			}
 
 			function onResize(e) {
