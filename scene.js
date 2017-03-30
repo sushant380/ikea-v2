@@ -6,6 +6,9 @@ var lastRenderTime = 0,skybox;
 // How big of a box to render.
 var boxSize = 5;
 // Various global THREE.Objects.
+ var o,
+    handLeft,
+    handRight,cameraContainer;
 
 var cube;// EnterVRButton for rendering enter/exit UI.
 
@@ -95,7 +98,18 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				var dirLight2 = new THREE.DirectionalLight( 0xffffff, 0.3 );
 				dirLight2.castShadow = true; 
 				dirLight2.position.set(0,4,0)
-				scene.add( dirLight2 );					
+				scene.add( dirLight2 );			
+
+				var geometry = new THREE.BoxGeometry( .1, .1, .1 );
+			    var material = new THREE.MeshPhongMaterial( {color: 0xffffff, wireframe:false} );
+
+			    cameraContainer = new THREE.Object3D();
+			    cameraContainer.add(camera);
+    			scene.add(cameraContainer);
+			    o = new THREE.Mesh( geometry, material );
+
+			    handLeft = o.clone();
+			    handRight = o.clone();		
 				/*scene = new THREE.Scene();
 							
 //				var helper = new THREE.CameraHelper( dirLight2.shadow.camera );
@@ -346,6 +360,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			  vrDisplay.requestAnimationFrame(animate);
 			  var handRightRotation = handRight.rotation.toVector3();
     			handRightRotation.normalize();
+    			console.log(handRight.position, handRight.rotation);
     			ABSULIT.pointer.update(handRight.position, handRight.rotation);
 			}
 
