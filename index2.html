@@ -81,7 +81,10 @@ body {
 
 <body>
   
-
+    <div id="ui">
+    <div id="vr-button"></div>
+    <a id="magic-window" href="#">Try it without a headset</a>
+  </div>
     <aside id="calibrate-compass-popup" class="popup">
       <p>
         <strong>Calibrate your compass</strong> by moving your device in a figure 8 motion as shown below.
@@ -153,12 +156,19 @@ WebVRConfig = {
   VREffect.js handles stereo camera setup and rendering.
 -->
 <script src="js/effects/VREffect.js"></script>
-
 <!--
   A polyfill for WebVR using the Device{Motion,Orientation}Event API.
 -->
 <script src="js/webvr-polyfill.min.js"></script>
+
+<!--
+  A set of UI controls for entering VR mode.
+-->
+<script src="js/webvr-ui.min.js"></script>
 <script src="js/DeviceOrientationController.js"></script>
+<script src="js/StereoEffect.js"></script>
+<script src="js/pointer.js"></script> 
+<script src="js/gamepad.js"></script> 
 <script src="https://richtr.github.io/doe/doe.js"></script>
 <!--
   A set of UI controls for entering VR mode.
@@ -192,7 +202,7 @@ WebVRConfig = {
 <script>
 function onLoad() {
   init();
-  animate();
+  // animate();
   var RPDMgmt = new RPDManager();;
   RPDMgmt.setRPDBox()
 }

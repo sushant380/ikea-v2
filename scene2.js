@@ -6,7 +6,9 @@ var lastRenderTime = 0,skybox;
 // How big of a box to render.
 var boxSize = 5;
 // Various global THREE.Objects.
-
+var o,
+    handLeft,
+    handRight,cameraContainer;
 var cube;// EnterVRButton for rendering enter/exit UI.
 
 
@@ -94,7 +96,18 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				var dirLight2 = new THREE.DirectionalLight( 0xffffff, 0.3 );
 				dirLight2.castShadow = true; 
 				dirLight2.position.set(0,4,0)
-				scene.add( dirLight2 );					
+				scene.add( dirLight2 );		
+
+				var geometry = new THREE.BoxGeometry( .1, .1, .1 );
+			    var material = new THREE.MeshPhongMaterial( {color: 0xffffff, wireframe:false} );
+
+			    cameraContainer = new THREE.Object3D();
+			    cameraContainer.add(camera);
+    			scene.add(cameraContainer);
+			    o = new THREE.Mesh( geometry, material );
+
+			    handLeft = o.clone();
+			    handRight = o.clone();			
 				/*scene = new THREE.Scene();
 							
 //				var helper = new THREE.CameraHelper( dirLight2.shadow.camera );
@@ -278,7 +291,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				// scene.add(cube);
 				setupControllerEventHandlers( controls );
 
-				/*window.addEventListener('resize', onResize, true);
+				window.addEventListener('resize', onResize, true);
 				window.addEventListener('vrdisplaypresentchange', onResize, true);
 
 				// Initialize the WebVR UI.
@@ -302,7 +315,8 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				document.getElementById('magic-window').addEventListener('click', function() {
 					vrButton.requestEnterFullscreen();
 				});
-				setupStage();*/
+				setupStage();
+				ABSULIT.pointer.init();
 			}
 			function setupControllerEventHandlers( controls ) {
 				var controllerEl = document.querySelector( '#controllername' );
@@ -378,9 +392,19 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			}
 
 			function animate(timestamp) {
-				controls.update();
+				var delta = Math.min(timestamp - lastRenderTime, 500);
+			  	lastRenderTime = timestamp;
+				dirLight.position.set( camera.position.x, camera.position.y, camera.position.z );
+				if (vrButton.isPresenting()) {
+			    controls.update();
+			  }
 				renderer.render( scene, camera );
-				requestAnimationFrame( animate );
+				//requestAnimationFrame( animate );
+				 vrDisplay.requestAnimationFrame(animate);
+			  var handRightRotation = handRight.rotation.toVector3();
+    			handRightRotation.normalize();
+    			//console.log(handRight.position, handRight.rotation);
+    			ABSULIT.pointer.update(handRight.position, handRight.rotation);
 
 			}
 
@@ -408,7 +432,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 
 			function setStageDimensions(stage) {
 			  // Make the skybox fit the stage.
-			  var material = skybox.material;
+			  /*var material = skybox.material;
 			  scene.remove(skybox);
 
 			  // Size the skybox according to the size of the actual stage.
@@ -417,10 +441,10 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 
 			  // Place it on the floor.
 			  skybox.position.y = boxSize/2;
-			  scene.add(skybox);
+			  scene.add(skybox);*/
 
 			  // Place the cube in the middle of the scene, at user height.
-			  camera.position.set(1, controls.userHeight, 6);
+			  camera.position.set(0, controls.userHeight, 0);
 			}
 
 			function changeRpd(){
