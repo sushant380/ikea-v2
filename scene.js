@@ -303,6 +303,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 					vrButton.requestEnterFullscreen();
 				});
 				setupStage();
+				ABSULIT.pointer.init();
 			}
 			function onTextureLoaded(texture) {
 				  texture.wrapS = THREE.RepeatWrapping;
