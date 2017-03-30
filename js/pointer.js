@@ -27,11 +27,11 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
     circleGeometry.vertices.shift();
 
     object.line = new THREE.Line(lineGeometry, lineMaterial);
-    object.line.position.set(0,0,1);
+    object.line.position.set(0,0,-1);
     object.line.visible = true;
 
     object.circle = new THREE.Line(circleGeometry, lineMaterial);
-    object.circle.position.set(0,0,1);
+    object.circle.position.set(0,0,-1);
     object.circle.visible = true;
 
     var lineContainer = new THREE.Object3D();
