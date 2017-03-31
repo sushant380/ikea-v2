@@ -27,7 +27,7 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
     lineGeometry.vertices.push(new THREE.Vector3(0, 0.1, 0.0));
     lineGeometry.vertices.push(new THREE.Vector3(0, 0.0, -10.0));
 
-    circleGeometry = new THREE.CircleGeometry( 0.01, 64 );
+    circleGeometry = new THREE.CircleGeometry( 0.02, 64 );
     circleGeometry.vertices.shift();
 
     object.line = new THREE.Line(lineGeometry, lineMaterial);
@@ -59,7 +59,7 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
 
         lineContainer.position.x = camera.position.x + cameraContainer.position.x;
         lineContainer.position.y = camera.position.y + cameraContainer.position.y;
-        lineContainer.position.z = camera.position.z + cameraContainer.position.y;
+        lineContainer.position.z = camera.position.z + cameraContainer.position.z;
 
         lineContainer.rotation.copy(camera.rotation);
 

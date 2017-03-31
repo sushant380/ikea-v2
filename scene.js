@@ -293,6 +293,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				// Add cube mesh to your three.js scene
 				// scene.add(cube);
 				window.addEventListener('click',moveCamera,true);
+				window.addEventListener('touchstart',moveCamera,true);
 
 				window.addEventListener('resize', onResize, true);
 				window.addEventListener('vrdisplaypresentchange', onResize, true);
