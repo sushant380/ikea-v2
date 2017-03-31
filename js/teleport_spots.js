@@ -90,6 +90,8 @@ ABSULIT.teleportSpots = ABSULIT.teleportSpots || (function () {
 
 					cameraContainer.position.copy(selectedSpot.position);
                     cameraContainer.position.y = 0;
+                    cameraContainer.position.z = 0;
+                    camera.lookAt(selectedSpot);
                 
                 selectedSpot.material.color.setRGB(1, 1, 0);
                 selectedSpot = null;
