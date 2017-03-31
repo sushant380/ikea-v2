@@ -38,7 +38,8 @@ function RoomItem(item,parent,itemsHolder){
         spotMesh.position.copy(this.Pos);
         spotMesh.position.z=spotMesh.position.z+(this.d/2)+0.5;
         spotMesh.position.x=spotMesh.position.x+(this.w/2);
-        spotMesh.rotation.copy(this.Ori);
+        var rot=new THREE.Euler(this.Ori);
+        spotMesh.rotation.copy(rot);
         return spotMesh.position;
 
 	};

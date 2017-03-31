@@ -14,7 +14,7 @@ ABSULIT.teleportSpots = ABSULIT.teleportSpots || (function () {
     object.ART_POINTER_TYPE = 'art';
 
 
-    var geometry = new THREE.SphereBufferGeometry(.04, 32, 32),
+    var geometry = new THREE.SphereBufferGeometry(.02, 32, 32),
         material = new THREE.MeshLambertMaterial( {color: 0xffff00} ),
         spotMesh = new THREE.Mesh( geometry, material );
 
@@ -89,8 +89,8 @@ ABSULIT.teleportSpots = ABSULIT.teleportSpots || (function () {
                     //camera.position.y = userHeight;\
                     var currentPosX={x:cameraContainer.position.x};
                     var toPosition={x:selectedSpot.position.x};
-                    var doorTween = new TWEEN.Tween(currentPosX).to(toPosition, 1000).onUpdate(function(){
-                        console.log('updating.......')
+                    var doorTween = new TWEEN.Tween(currentPosX).to(toPosition, 2000).onUpdate(function(){
+                        
                     cameraContainer.position.x=currentPosX.x;
                         cameraContainer.position.y = 0;
                         cameraContainer.position.z = 0;

@@ -27,7 +27,7 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
     lineGeometry.vertices.push(new THREE.Vector3(0, 0.1, 0.0));
     lineGeometry.vertices.push(new THREE.Vector3(0, 0.0, -10.0));
 
-    circleGeometry = new THREE.CircleGeometry( 0.03, 64 );
+    circleGeometry = new THREE.CircleGeometry( 0.01, 64 );
     circleGeometry.vertices.shift();
 
     object.line = new THREE.Line(lineGeometry, lineMaterial);
