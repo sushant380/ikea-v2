@@ -86,11 +86,20 @@ ABSULIT.teleportSpots = ABSULIT.teleportSpots || (function () {
 
             if(selectedSpotTotal < clock.getElapsedTime()){
                               //camera.position.copy(selectedSpot.position);
-                    //camera.position.y = userHeight;
-
-					cameraContainer.position.copy(selectedSpot.position);
-                    cameraContainer.position.y = 0;
-                    cameraContainer.position.z = 0;
+                    //camera.position.y = userHeight;\
+                    var currentPosX={x:cameraContainer.position.x};
+                    var toPosition={x:selectedSpot.position.x};
+                    var doorTween = new TWEEN.Tween(currentPosX).to(toPosition, 1000).onUpdate(function(){
+                        console.log('updating.......')
+                    cameraContainer.position.x=currentPosX.x;
+                        cameraContainer.position.y = 0;
+                        cameraContainer.position.z = 0;
+                }).onComplete(function(){
+             console.log('completed');
+                }).easing(TWEEN.Easing.Quadratic.In).start();
+                    
+					//cameraContainer.position.copy(selectedSpot.position);
+                    
                     //camera.lookAt(selectedSpot);
                 
                 selectedSpot.material.color.setRGB(1, 1, 0);

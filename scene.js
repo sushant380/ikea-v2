@@ -345,6 +345,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			}
 
 			function animate(timestamp) {
+				TWEEN.update();
 				var delta = Math.min(timestamp - lastRenderTime, 500);
 			  	lastRenderTime = timestamp;
 				dirLight.position.set( camera.position.x, camera.position.y, camera.position.z );
@@ -364,6 +365,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
     			//console.log(handRight.position, handRight.rotation);
     			ABSULIT.pointer.update(handRight.position, handRight.rotation);
     			ABSULIT.teleportSpots.update();
+
 			}
 
 			function onResize(e) {
