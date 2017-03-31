@@ -46,6 +46,7 @@ this.createItems = function() {
 		parent.isHost=true;*/
 		item.isHost=true;
 		rItem=new RoomItem(item,undefined,this);
+		
 		if(this.items[i].lockXTranslation!=undefined) item.obj.userData.lockXTranslation = this.items[i].lockXTranslation
 		if(this.items[i].lockYTranslation!=undefined) item.obj.userData.lockYTranslation = this.items[i].lockYTranslation
 		if(this.items[i].lockZTranslation!=undefined) item.obj.userData.lockZTranslation = this.items[i].lockZTranslation
@@ -74,6 +75,19 @@ this.createItems = function() {
 		//this.scene.add(item.obj)
 		//this.scene.add(parent);
 	}
+	ABSULIT.pointer.init();
+				var teleportSpots=[];
+				for (var i = 0; i < interactiveRoomObjs.length; i++) {
+					try{
+					teleportSpots.push(interactiveRoomObjs[i].getSpot());
+				}catch(e){
+
+				}
+				}
+				ABSULIT.teleportSpots.init(teleportSpots);
+				for (var i = 0; i < ABSULIT.pointer.objects.length; i++) {
+					interactiveObjects.push(ABSULIT.pointer.objects[i]);
+				}
 },
 
 this.init = function() {

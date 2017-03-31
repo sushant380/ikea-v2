@@ -19,6 +19,7 @@ function RoomItem(item,parent,itemsHolder){
 	this.itemsHolder=itemsHolder;
 	this.childLoadCount=0;
 	this.opening=item.opening||"Left";
+	
 	if(parent ===undefined){
 		interactiveRoomObjs.push(this);
 	}
@@ -29,6 +30,17 @@ function RoomItem(item,parent,itemsHolder){
 			this.obj.add(itm);
 		}
 		
+	};
+	this.getSpot=function(){
+		var geometry = new THREE.SphereBufferGeometry(.1, 32, 32),
+        material = new THREE.MeshLambertMaterial( {color: 0xffff00} ),
+        spotMesh = new THREE.Mesh( geometry, material );
+        spotMesh.position.copy(this.Pos);
+        spotMesh.position.z=spotMesh.position.z+(this.d/2)+0.5;
+        spotMesh.position.x=spotMesh.position.x+(this.w/2);
+        spotMesh.rotation.copy(this.Ori);
+        return spotMesh.position;
+
 	};
 	function init(current){
 		

@@ -59,7 +59,7 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
 
         lineContainer.position.x = camera.position.x + cameraContainer.position.x;
         lineContainer.position.y = camera.position.y + cameraContainer.position.y;
-        lineContainer.position.z = camera.position.z ;
+        lineContainer.position.z = camera.position.z + cameraContainer.position.y;
 
         lineContainer.rotation.copy(camera.rotation);
 
@@ -72,7 +72,7 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
 
             if (intersected !== collisions[0].object) {
 
-                if (intersected) {
+                if (intersected && ABSULIT.teleportSpots.TELEPORT_POINTER_TYPE !== intersected.pointerType) {
                     //intersected.material.emissive.setHex( intersected.originalHex );//
                     var SELECTED=this.findParent(intersected)
                     this.updateBox(SELECTED);

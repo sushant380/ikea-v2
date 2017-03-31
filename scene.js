@@ -8,7 +8,8 @@ var boxSize = 5;
 // Various global THREE.Objects.
  var o,
     handLeft,
-    handRight,cameraContainer;
+    handRight,cameraContainer,
+    userHeight = 1.6;
 
 var cube;// EnterVRButton for rendering enter/exit UI.
 
@@ -317,7 +318,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 					vrButton.requestEnterFullscreen();
 				});
 				setupStage();
-				ABSULIT.pointer.init();
+
 			}
 			function onTextureLoaded(texture) {
 				  texture.wrapS = THREE.RepeatWrapping;
@@ -362,6 +363,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
     			handRightRotation.normalize();
     			//console.log(handRight.position, handRight.rotation);
     			ABSULIT.pointer.update(handRight.position, handRight.rotation);
+    			ABSULIT.teleportSpots.update();
 			}
 
 			function onResize(e) {
