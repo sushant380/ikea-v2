@@ -89,7 +89,7 @@ ABSULIT.teleportSpots = ABSULIT.teleportSpots || (function () {
                     //camera.position.y = userHeight;\
                     var currentPosX={x:cameraContainer.position.x};
                     var toPosition={x:selectedSpot.position.x};
-                    var doorTween = new TWEEN.Tween(currentPosX).to(toPosition, 2000).onUpdate(function(){
+                    var doorTween = new TWEEN.Tween(currentPosX).to(toPosition, 1000).onUpdate(function(){
                         
                     cameraContainer.position.x=currentPosX.x;
                         cameraContainer.position.y = 0;
