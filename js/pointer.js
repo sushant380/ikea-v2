@@ -11,6 +11,7 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
     var object = {},
         raycaster,
         intersected,
+        collisionPoint,
         lineMaterial = new THREE.LineBasicMaterial({color: 0x00FF00}),
         lineGeometry = new THREE.Geometry(),
         circleGeometry = new THREE.Geometry();
@@ -64,23 +65,26 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
         lineContainer.rotation.copy(camera.rotation);
 
 
-        var collisions = raycaster.intersectObjects(interactiveObjects);
+        var collisions = raycaster.intersectObjects(scene.children);
 
         if (collisions.length > 0) {
             //console.log('---- collisions[0].distance: ', collisions[0].distance);
             //object.line.position.set(0, 0, -collisions[0].distance);
-
-            if (intersected !== collisions[0].object) {
-
-                if (intersected && ABSULIT.teleportSpots.TELEPORT_POINTER_TYPE !== intersected.pointerType) {
+            intersected = collisions[0].object;
+if (intersected && intersected.name==='floor') {
+            if (this.collisionPoint===undefined ||this.collisionPoint.x !== collisions[0].point.x || this.collisionPoint.y!==collisions[0].point.y || this.collisionPoint.z!==collisions[0].point.z) {
+                 
+                 this.collisionPoint=collisions[0].point;
+                
                     //intersected.material.emissive.setHex( intersected.originalHex );//
-                    var SELECTED=this.findParent(intersected)
+                   /* var SELECTED=this.findParent(intersected)
                     this.updateBox(SELECTED);
+*/                 // console.log('intersected floor');
+                    //intersected.originalHex = intersected.material.emissive.getHex();//
+                    //intersected.material.emissive.setHex( 0xff0000 );//
+                    //intersected.dispatchEvent( {'type': object.IN, 'detail': collisionPoint  } );
                 }
-                intersected = collisions[0].object;
-                //intersected.originalHex = intersected.material.emissive.getHex();//
-                //intersected.material.emissive.setHex( 0xff0000 );//
-                intersected.dispatchEvent( {'type': object.IN, 'detail': intersected  } );
+               
             }
 
         } else {
@@ -92,6 +96,47 @@ ABSULIT.pointer = ABSULIT.pointer || (function () {
             }
         }
 
+    };
+    object.move=function(){
+        if(this.collisionPoint){
+
+           /* var percentTime =  (clock.getElapsedTime() - selectedSpotStart) / (selectedSpotTotal - selectedSpotStart);
+
+            selectedSpot.material.color.setRGB(1 - percentTime, 1, 0);
+
+            if(selectedSpotTotal < clock.getElapsedTime()){*/
+                              //camera.position.copy(selectedSpot.position);
+                    //camera.position.y = userHeight;\
+                    var currentPosX={x:cameraContainer.position.x,
+                       z:cameraContainer.position.z};
+
+                    var toPosition={x:this.collisionPoint.x,z:this.collisionPoint.z};
+                    if(this.collisionPoint.z<0){
+                        toPosition.z=toPosition.z+0.5;
+                    }else{
+                        toPosition.z=toPosition.z-0.5;
+                    }
+                    
+
+                    var doorTween = new TWEEN.Tween(currentPosX).to(toPosition, 1000).onUpdate(function(){
+                        
+                    cameraContainer.position.x=currentPosX.x;
+                    cameraContainer.position.z=currentPosX.z;
+                    cameraContainer.position.y = 0;
+                        
+                        
+                }).onComplete(function(){
+            
+                }).easing(TWEEN.Easing.Quadratic.In).start();
+                    
+                    //cameraContainer.position.copy(selectedSpot.position);
+                    
+                    //camera.lookAt(selectedSpot);
+                
+               /* selectedSpot.material.color.setRGB(1, 1, 0);*/
+                selectedSpot = null;
+          //  }
+        }
     };
     object.findParent=function(object){
             var parent;

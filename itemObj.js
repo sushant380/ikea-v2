@@ -63,7 +63,7 @@ this.createItems = function() {
 		
 		if(this.itemsOffsetPos instanceof Function) { //exec post offsetPOS update
 			var nPos = this.itemsOffsetPos(item, item.obj.getWorldDirection()) 
-			item.setItemPosition(nPos)
+			item.setItemPosition(nPos);
 		
 //			console.log(item.obj.getWorldDirection())
 			
@@ -76,18 +76,8 @@ this.createItems = function() {
 		//this.scene.add(parent);
 	}
 	ABSULIT.pointer.init();
-				var teleportSpots=[];
-				for (var i = 0; i < interactiveRoomObjs.length; i++) {
-					try{
-					teleportSpots.push(interactiveRoomObjs[i].getSpot());
-				}catch(e){
-
-				}
-				}
-				ABSULIT.teleportSpots.init(teleportSpots);
-				for (var i = 0; i < ABSULIT.pointer.objects.length; i++) {
-					interactiveObjects.push(ABSULIT.pointer.objects[i]);
-				}
+				
+				
 },
 
 this.init = function() {

@@ -110,7 +110,8 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 			    o = new THREE.Mesh( geometry, material );
 
 			    handLeft = o.clone();
-			    handRight = o.clone();		
+			    handRight = o.clone();	
+			    var ua = detect.parse(navigator.userAgent);	
 				/*scene = new THREE.Scene();
 							
 //				var helper = new THREE.CameraHelper( dirLight2.shadow.camera );
@@ -292,9 +293,11 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				
 				// Add cube mesh to your three.js scene
 				// scene.add(cube);
-				window.addEventListener('click',moveCamera,true);
-				window.addEventListener('touchstart',moveCamera,true);
-
+				if(ua.device.type=="Desktop"){
+					window.addEventListener('dblclick',moveCamera,true);
+				}else if(ua.device.type=="Mobile"){
+					window.addEventListener('touchstart',moveCamera,true);
+				}
 				window.addEventListener('resize', onResize, true);
 				window.addEventListener('vrdisplaypresentchange', onResize, true);
 
@@ -323,7 +326,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 
 			}
 			function moveCamera(){
-				ABSULIT.teleportSpots.update();
+				ABSULIT.pointer.move();
 			}
 			function onTextureLoaded(texture) {
 				  texture.wrapS = THREE.RepeatWrapping;

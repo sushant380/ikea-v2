@@ -25,9 +25,9 @@ ABSULIT.teleportSpots = ABSULIT.teleportSpots || (function () {
 
     function onPointerIN(e){
         //console.log(e.detail);
-        var target = e.detail;
-        console.log(target.pointerType);
-        if( (object.TELEPORT_POINTER_TYPE === target.pointerType) && !selectedSpot ){
+        selectedSpot = e.detail;
+       // console.log(target.pointerType);
+       /* if( (object.TELEPORT_POINTER_TYPE === target.pointerType) && !selectedSpot ){
             //console.log('---- set selectedSpot and set selectedSpotStart');
             selectedSpot = target;
             selectedSpotStart = clock.getElapsedTime();
@@ -42,15 +42,15 @@ ABSULIT.teleportSpots = ABSULIT.teleportSpots || (function () {
                     target,
                     new THREE.Vector3(1,0,0)
             );*/
-        }
+        //}
     };
 
     function onPointerOUT(e){
-        if(selectedSpot){
+        /*if(selectedSpot){
             selectedSpot.material.color.setRGB(1, 1, 0);
             selectedSpot = null;
             selectedSpotTotal = 0;
-        }
+        }*/
         //ABSULIT.info.hide();
     };
 
@@ -80,11 +80,11 @@ ABSULIT.teleportSpots = ABSULIT.teleportSpots || (function () {
     object.update = function () {
         if(selectedSpot){
 
-            var percentTime =  (clock.getElapsedTime() - selectedSpotStart) / (selectedSpotTotal - selectedSpotStart);
+           /* var percentTime =  (clock.getElapsedTime() - selectedSpotStart) / (selectedSpotTotal - selectedSpotStart);
 
             selectedSpot.material.color.setRGB(1 - percentTime, 1, 0);
 
-            if(selectedSpotTotal < clock.getElapsedTime()){
+            if(selectedSpotTotal < clock.getElapsedTime()){*/
                               //camera.position.copy(selectedSpot.position);
                     //camera.position.y = userHeight;\
                     var currentPosX={x:cameraContainer.position.x,
@@ -113,9 +113,9 @@ ABSULIT.teleportSpots = ABSULIT.teleportSpots || (function () {
                     
                     //camera.lookAt(selectedSpot);
                 
-                selectedSpot.material.color.setRGB(1, 1, 0);
+               /* selectedSpot.material.color.setRGB(1, 1, 0);*/
                 selectedSpot = null;
-            }
+          //  }
         }
     };
 
