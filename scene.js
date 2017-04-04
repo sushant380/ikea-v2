@@ -82,24 +82,39 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				
 				// LIGHTS
 				var hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.6 );
-				hemiLight.position.set( 0, 0, 500 );
-				scene.add( hemiLight ); 
+				hemiLight.position.set( 0, 0, 5 );
+				//scene.add( hemiLight ); 
 				//
 				
-				var light = new THREE.AmbientLight( 0x404040 ); // soft white light
-				scene.add( light );
-
-
-				dirLight = new THREE.DirectionalLight( 0x404040, 0.7 );
-				dirLight.castShadow = true; 
+				dirLight = new THREE.PointLight( 0xfdffea, 0.5, 50 ); // soft white light
 				scene.add( dirLight );
+
+				var light = new THREE.DirectionalLight("0xffffff");
+light.position.set(0, 2, 2);
+light.target.position.set(0, 0, 0);
+light.castShadow = true;
+light.shadowDarkness = 0.5;
+light.shadowCameraVisible = true; // only for debugging
+// these six values define the boundaries of the yellow box seen above
+light.shadowCameraNear = 2;
+light.shadowCameraFar = 5;
+light.shadowCameraLeft = -0.5;
+light.shadowCameraRight = 0.5;
+light.shadowCameraTop = 0.5;
+light.shadowCameraBottom = -0.5;
+scene.add(light);
+
+
+				/*dirLight = new THREE.DirectionalLight( 0x404040, 0.7 );
+				dirLight.castShadow = true; 
+				scene.add( dirLight );*/
 //				var helper = new THREE.CameraHelper( dirLight.shadow.camera );
 //				scene.add( helper );
 
-				var dirLight2 = new THREE.DirectionalLight( 0xffffff, 0.3 );
+				/*var dirLight2 = new THREE.DirectionalLight( 0xffffff, 0.3 );
 				dirLight2.castShadow = true; 
 				dirLight2.position.set(0,4,0)
-				scene.add( dirLight2 );			
+				scene.add( dirLight2 );*/			
 
 				var geometry = new THREE.BoxGeometry( .1, .1, .1 );
 			    var material = new THREE.MeshPhongMaterial( {color: 0xffffff, wireframe:false} );
@@ -356,7 +371,7 @@ var cube;// EnterVRButton for rendering enter/exit UI.
 				TWEEN.update();
 				var delta = Math.min(timestamp - lastRenderTime, 500);
 			  	lastRenderTime = timestamp;
-				dirLight.position.set( camera.position.x, camera.position.y, camera.position.z );
+				//dirLight.position.set( camera.position.x, camera.position.y, camera.position.z );
 			  // Apply rotation to cube mesh
 			  // cube.rotation.y += delta * 0.0006;
 

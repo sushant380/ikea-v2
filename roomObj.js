@@ -225,6 +225,7 @@ this.correctMaxtrixAfterChanges = function(obj) {
 }
 this.setFloor = function() {
 	var geometry = new THREE.ShapeGeometry( this.roomShape );
+
 	this.floorShape = new THREE.Mesh( geometry );
 	this.floorShape.receiveShadow = true;
 	this.floorShape.castShadow = true;
@@ -236,8 +237,27 @@ this.setFloor = function() {
 	this.floorShape.name ="floor"
 
 	// create texture and material
-	var t = "50080570utan_s.jpg"
-	this.setTexture(this.floorShape, t)
+	var map=new THREE.TextureLoader().load( "img/floor/italian_COLOR.png" ),
+		displacementMap=new THREE.TextureLoader().load( "img/floor/italian_DISP.png" ),
+		normalMap=new THREE.TextureLoader().load( "img/floor/italian_NRM.png" ),
+		aoMap=new THREE.TextureLoader().load( "img/floor/italian_OCC.png" ),
+		specularMap=new THREE.TextureLoader().load( "img/floor/italian_SPEC.png" );
+
+		map.wrapS=map.wrapT=THREE.RepeatWrapping;
+		displacementMap.wrapS=displacementMap.wrapT=THREE.RepeatWrapping;
+		normalMap.wrapS=normalMap.wrapT=THREE.RepeatWrapping;
+		aoMap.wrapS=aoMap.wrapT=THREE.RepeatWrapping;
+		specularMap.wrapS=specularMap.wrapT=THREE.RepeatWrapping;
+	var floorTexture=new THREE.MeshPhongMaterial({
+		map:map,
+		displacementMap:displacementMap,
+		normalMap:normalMap,
+		aoMap:aoMap,
+		specularMap:specularMap,
+		displacementScale:0.01
+	});
+	this.floorShape.material=floorTexture
+	//this.setTexture(this.floorShape, t)
 	
 },
 

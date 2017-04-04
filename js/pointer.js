@@ -134,7 +134,7 @@ if (intersected && intersected.name==='floor') {
                     //camera.lookAt(selectedSpot);
                 
                /* selectedSpot.material.color.setRGB(1, 1, 0);*/
-                selectedSpot = null;
+              //  selectedSpot = null;
           //  }
         }
     };
