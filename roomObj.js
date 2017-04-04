@@ -147,7 +147,7 @@ this.roomWallShapesInner = function() {
 		var extrudeSettingsWalls = {amount: parseFloat(this.ceilingHeight), bevelEnabled: false};	
 		//
 	    var geometryWall = new THREE.ExtrudeGeometry( squareShape, extrudeSettingsWalls );
-	    var wallMaterial=new THREE.MeshBasicMaterial( {color: 0xFFFFFF} );
+	    var wallMaterial=new THREE.MeshBasicMaterial( {color: 0xf7e7ce} );
 	    var wallgeo =new THREE.Geometry();
 		wallgeo.vertices=geometryWall.vertices;
 		wallgeo.faces=geometryWall.faces;

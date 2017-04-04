@@ -606,7 +606,7 @@ function cabItems(type,id, obj, whdObj,lstSlot,parentObj) {
 			this.isVisibleFromOutside = true// for VR filtering
 			
 			// test
-			this.texture = "20161_personlig02a_01_14_light_oak_effect_PE513618.jpg"
+			//this.texture = "20161_personlig02a_01_14_light_oak_effect_PE513618.jpg"
 						
 			var cabHob =new cabItems("CabHob_",0, obj, whdObj,lstOccupiedSlot,this)		
 			if(cabHob.shape!==undefined){
